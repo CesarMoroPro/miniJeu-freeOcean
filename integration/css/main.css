@@ -212,8 +212,8 @@ body h2 {
 
 .animal {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
 }
 
 .fish {
@@ -231,13 +231,13 @@ body h2 {
 }
 
 .fish--2 {
-  top: 185px;
+  top: 180px;
   left: 100px;
 }
 
 .fish--3 {
   top: 30px;
-  left: 160px;
+  left: 155px;
 }
 
 .fish--4 {
@@ -257,7 +257,7 @@ body h2 {
 
 .fish--7 {
   top: 70px;
-  left: 180px;
+  left: 175px;
 }
 
 .octopus {
@@ -298,8 +298,8 @@ body h2 {
 }
 
 .dolphin--0 {
-  top: 80px;
-  left: 80px;
+  top: 95px;
+  left: 65px;
 }
 
 .dolphin--1 {
@@ -308,7 +308,7 @@ body h2 {
 }
 
 .dolphin--2 {
-  top: 160px;
+  top: 155px;
   left: 35px;
 }
 
