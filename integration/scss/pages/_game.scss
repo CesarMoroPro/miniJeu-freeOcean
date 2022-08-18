@@ -1,7 +1,9 @@
+//* Code for span elements
 .bold {
     font-weight: bold;
 }
 
+//* Code for the DIV STARTING >>> Div click-player + Div Rules
 #starting {
     display: flex;
     flex-direction: row;
@@ -64,6 +66,8 @@
     }
 }
 
+//* Code for the DIV GAME-SPACE >>> Div Net
+//* Code for the Boat and Animals are in specific files in Components Dir 
 #game-space {
     border: green solid 2px;
 

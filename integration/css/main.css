@@ -264,16 +264,76 @@ body h2 {
   border: red solid 1px;
 }
 
+.octopus--0 {
+  top: 30px;
+  left: 30px;
+}
+
+.octopus--1 {
+  top: 150px;
+  left: 90px;
+}
+
 .shark {
   border: green solid 1px;
 }
 
+.shark--0 {
+  top: 135px;
+  left: 130px;
+}
+
+.shark--1 {
+  top: 10px;
+  left: 110px;
+}
+
+.shark--2 {
+  top: 65px;
+  left: 10px;
+}
+
 .dolphin {
-  border: blue solid 1px;
+  border: purple solid 1px;
+}
+
+.dolphin--0 {
+  top: 80px;
+  left: 80px;
+}
+
+.dolphin--1 {
+  top: 95px;
+  left: 150px;
+}
+
+.dolphin--2 {
+  top: 160px;
+  left: 35px;
 }
 
 .turtle {
   border: orange solid 1px;
+}
+
+.turtle--0 {
+  top: 85px;
+  left: 35px;
+}
+
+.turtle--1 {
+  top: 40px;
+  left: 125px;
+}
+
+.turtle--2 {
+  top: 90px;
+  left: 100px;
+}
+
+.turtle--3 {
+  top: 130px;
+  left: 60px;
 }
 
 /*# sourceMappingURL=main.css.map */

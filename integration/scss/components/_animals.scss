@@ -1,9 +1,11 @@
-//* This code is for all animals
+//* This code is for all ANIMALS
 .animal {
     position: absolute;
     width: 10px;
     height: 10px;
 }
+//* ==========================================================
+
 
 //* This code is for all fishes
 .fish {
@@ -50,6 +52,7 @@
     top: 70px;
     left: 180px;
 }
+//* ==========================================================
 
 
 //* This code is for all octopuses
@@ -58,9 +61,16 @@
 }
 
 //* This code is for each octopus
+.octopus--0 {
+    top: 30px;
+    left: 30px;
+}
 
-
-
+.octopus--1 {
+    top: 150px;
+    left: 90px;
+}
+//* ==========================================================
 
 
 //* This code is for all sharks
@@ -69,16 +79,44 @@
 }
 
 //* This code is for each shark
+.shark--0 {
+    top: 135px;
+    left: 130px;
+}
 
+.shark--1 {
+    top: 10px;
+    left: 110px;
+}
+
+.shark--2 {
+    top: 65px;
+    left: 10px;
+}
+//* ==========================================================
 
 
 //* This code is for all dolphins
 .dolphin {
-    border: blue solid 1px;
+    border: purple solid 1px;
 }
 
 //* This code is for each dolphin
+.dolphin--0 {
+    top: 80px;
+    left: 80px;
+}
 
+.dolphin--1 {
+    top: 95px;
+    left: 150px;
+}
+
+.dolphin--2 {
+    top: 160px;
+    left: 35px;
+}
+//* ==========================================================
 
 
 //* This code is for all turtles
@@ -87,3 +125,23 @@
 }
 
 //* This code is for each turtle
+.turtle--0 {
+    top: 85px;
+    left: 35px;
+}
+
+.turtle--1 {
+    top: 40px;
+    left: 125px;
+}
+
+.turtle--2 {
+    top: 90px;
+    left: 100px;
+}
+
+.turtle--3 {
+    top: 130px;
+    left: 60px;
+}
+//* ==========================================================
