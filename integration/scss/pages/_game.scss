@@ -1,36 +1,66 @@
-#click-player {
+.bold {
+    font-weight: bold;
+}
 
+#starting {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: $gutter-small-double-extra;
+    flex-direction: row;
 
-        .click-design {
-            margin: $gutter-small $gutter-regular;
+    #click-player {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: $gutter-small-double-extra;
+
+            .click-design {
+                margin: $gutter-small $gutter-regular;
+            }
+
+            #btn {
+                background-color: rgba(128, 0, 128, 0.3);
+                width: 80px;
+                padding: $gutter-small-extra;
+                border-radius: 35px;
+                border: rgb(128, 0, 128) 1px solid;
+            }
+
+            #btn:hover {
+                background-color: rgb(128, 0, 128);
+                border: solid 1px rgb(63, 0, 63);
+                color: white;
+            }
+
+        #result {
+
+            #card {
+                margin-top: $gutter-small;
+                border: solid 1px black;
+                height: 100px;
+                width: 100px;
+            }
         }
+    }
 
-        #btn {
-            background-color: rgba(128, 0, 128, 0.3);
-            width: 80px;
+    #rules {
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: $fontsize-regular*1.2;
             padding: $gutter-small-extra;
-            border-radius: 35px;
-            border: rgb(128, 0, 128) 1px solid;
         }
 
-        #btn:hover {
-            background-color: rgb(128, 0, 128);
-            border: solid 1px rgb(63, 0, 63);
-            color: white;
+        ul {
+            text-align: left;
+            padding: 0 0 0 $gutter-small-double-extra;            
         }
 
-    #result {
-
-        #card {
-            margin-top: $gutter-small;
-            border: solid 1px black;
-            height: 100px;
-            width: 100px;
+        .each-rule {
+            line-height: 1.15em;
+            letter-spacing: 1px;
         }
+
     }
 }
 

@@ -9,5 +9,10 @@ body{
 
     font-family: $font-main;
     font-size: $fontsize-regular;
+
+    h2 {
+        color: green;
+        font-size: $fontsize-regular;
+    }
 }
 
