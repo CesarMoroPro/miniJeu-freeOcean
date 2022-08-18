@@ -1,0 +1,23 @@
+//! Migration de l'opérande de division avec math.div()
+@use 'sass:math';
+
+//~ Import de reset-css
+@import '../../node_modules/reset-css/sass/reset';
+
+//~ Import des fichiers Utils
+@import './utils/variables';
+@import './utils/mixins';
+
+//~ Import des fichiers de Bases
+@import './bases/body';
+@import './bases/fonts';
+
+//~ Import des fichiers Layouts
+@import './layouts/header';
+
+//~ Import des fichiers Pages
+@import './pages/game';
+
+//~ Import des fichiers Components
+@import './components/boat';
+@import './components/animals';

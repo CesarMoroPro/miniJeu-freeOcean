@@ -1,0 +1,19 @@
+#title {
+    h1 {
+        color: blue;
+        font-size: $fontsize-large-extra;
+        margin: $gutter-small-extra;
+    }
+
+    h2 {
+        color: green;
+        font-size: $fontsize-large;
+        margin: $gutter-small-double-extra;
+        padding: $gutter-small-extra;
+    }
+
+    p {
+        color: red;
+        margin: $gutter-small $gutter-small-extra;
+    }
+}

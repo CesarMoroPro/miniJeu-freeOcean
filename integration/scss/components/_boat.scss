@@ -1,0 +1,37 @@
+.boat {
+    border: blue solid 1px;
+
+    position: absolute;
+    width: 60px;
+    height: 60px;
+}
+
+.boat--0 {
+    top: 10px;
+    right: 5px;
+}
+
+.boat--1 {
+    top: 90px;
+    right: 10px;
+}
+
+.boat--2 {
+    top: 170px;
+    right: 30px;
+}
+
+.boat--3 {
+    top: 180px;
+    right: 100px;
+}
+
+.boat--4 {
+    top: 190px;
+    right: 170px;
+}
+
+.boat--5 {
+    top: 200px;
+    right: 240px;
+}

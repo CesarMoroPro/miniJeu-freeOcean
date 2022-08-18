@@ -1,0 +1,28 @@
+//* BREAKPOINT SIZES
+$min-width-tablet: 720px;
+$min-width-desktop: 1080px;
+
+
+//* FONT FAMILIES
+$font-main: "Raleway";
+
+
+//* FONT SIZES
+$fontsize-regular: 1em;
+
+$fontsize-large: ($fontsize-regular*1.5);
+$fontsize-large-extra: ($fontsize-regular*2);
+
+$fontsize-small: math.div($fontsize-regular, 2);
+$fontsize-small-extra: math.div($fontsize-regular, 4);
+
+
+//* GUTTER SIZES
+$gutter-regular: 2em; // 32px
+
+$gutter-large: ($gutter-regular*1.5); // 48px
+$gutter-large-extra: ($gutter-regular*2); // 64px
+
+$gutter-small: math.div($gutter-regular, 2); // 16px
+$gutter-small-extra: math.div($gutter-regular, 4); // 8px
+$gutter-small-double-extra: math.div($gutter-regular, 8); // 4px

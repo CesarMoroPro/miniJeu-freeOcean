@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "reset-css": "^5.0.1"
+  },
+
+  "scripts": {
+    "sassC": "sass /var/www/projets/02_personnels/FreeOcean/integration/scss/main.scss /var/www/projets/02_personnels/FreeOcean/integration/css/main.css",
+    "sassW": "sass --watch /var/www/projets/02_personnels/FreeOcean/integration/scss:/var/www/projets/02_personnels/FreeOcean/integration/css"
+  }
+}
