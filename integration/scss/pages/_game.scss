@@ -3,6 +3,13 @@
     font-weight: bold;
 }
 
+//* Code for the DIV GLOBAL >>> Div Sarting + Div Game-space
+#global {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 //* Code for the DIV STARTING >>> Div click-player + Div Rules
 #starting {
     display: flex;
@@ -48,6 +55,8 @@
         display: flex;
         flex-direction: column;
 
+        width: 350px;
+
         h2 {
             font-size: $fontsize-regular*1.2;
             padding: $gutter-small-extra;
@@ -76,7 +85,7 @@
     position: relative;
     align-items: flex-start;
 
-    width: auto;
+    width: 450px;
     height: 250px;
     padding: $gutter-small-extra;
     margin: $gutter-small-double-extra 0;
