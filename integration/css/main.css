@@ -124,11 +124,11 @@ body h2 {
   width: 80px;
   padding: 0.5em;
   border-radius: 35px;
-  border: purple 1px solid;
+  border: rgb(128, 0, 128) 1px solid;
 }
 #starting #click-player #btn:hover {
-  background-color: purple;
-  border: solid 1px #3f003f;
+  background-color: rgb(128, 0, 128);
+  border: solid 1px rgb(63, 0, 63);
   color: white;
 }
 #starting #click-player #result #card {
