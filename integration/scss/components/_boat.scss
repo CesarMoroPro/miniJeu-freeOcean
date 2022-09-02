@@ -1,11 +1,3 @@
-#theBoat {
-    border: dashed 2px blue;
-    background-color: #f0f;
-    
-    width: 50px;
-    height: 50px;
-}
-
 .boat {
     border: blue solid 1px;
 
@@ -46,4 +38,10 @@
 .boat--5 {
     top: 200px;
     right: 240px;
+}
+
+
+.focused {
+    border: dashed 2px blue;
+    background-color: #f0f;
 }
