@@ -64,7 +64,7 @@ body {
   text-align: center;
   margin: 1em 0.5em;
   padding: 1em 0.5em;
-  font-family: "Raleway";
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
 }
 body h2 {
@@ -130,12 +130,16 @@ body h2 {
   background-color: rgb(128, 0, 128);
   border: solid 1px rgb(63, 0, 63);
   color: white;
+  cursor: pointer;
 }
-#starting #click-player #result #card {
+#starting #click-player #result #resultCard {
   margin-top: 1em;
   border: solid 1px black;
   height: 100px;
   width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #starting #rules {
   display: flex;
@@ -180,11 +184,21 @@ body h2 {
     padding: 2em;
   }
 }
+#theBoat {
+  border: dashed 2px blue;
+  background-color: #f0f;
+  width: 50px;
+  height: 50px;
+}
+
 .boat {
   border: blue solid 1px;
   position: absolute;
   width: 60px;
   height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .boat--0 {
@@ -341,6 +355,14 @@ body h2 {
 .turtle--3 {
   top: 130px;
   left: 60px;
+}
+
+.inactive {
+  visibility: hidden;
+}
+
+.active {
+  visibility: visible;
 }
 
 /*# sourceMappingURL=main.css.map */

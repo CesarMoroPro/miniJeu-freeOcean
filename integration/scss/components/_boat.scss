@@ -1,9 +1,21 @@
+#theBoat {
+    border: dashed 2px blue;
+    background-color: #f0f;
+    
+    width: 50px;
+    height: 50px;
+}
+
 .boat {
     border: blue solid 1px;
 
     position: absolute;
     width: 60px;
     height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .boat--0 {
