@@ -184,51 +184,6 @@ body h2 {
     padding: 2em;
   }
 }
-.boat {
-  border: blue solid 1px;
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.boat--0 {
-  top: 10px;
-  right: 5px;
-}
-
-.boat--1 {
-  top: 90px;
-  right: 10px;
-}
-
-.boat--2 {
-  top: 170px;
-  right: 30px;
-}
-
-.boat--3 {
-  top: 180px;
-  right: 100px;
-}
-
-.boat--4 {
-  top: 190px;
-  right: 170px;
-}
-
-.boat--5 {
-  top: 200px;
-  right: 240px;
-}
-
-.focused {
-  border: dashed 2px blue;
-  background-color: #f0f;
-}
-
 .animal {
   position: absolute;
   width: 15px;
@@ -361,6 +316,79 @@ body h2 {
 
 .active {
   visibility: visible;
+}
+
+.boat {
+  border: blue solid 1px;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boat--0 {
+  top: 10px;
+  right: 5px;
+}
+
+.boat--1 {
+  top: 90px;
+  right: 10px;
+}
+
+.boat--2 {
+  top: 170px;
+  right: 30px;
+}
+
+.boat--3 {
+  top: 180px;
+  right: 100px;
+}
+
+.boat--4 {
+  top: 190px;
+  right: 170px;
+}
+
+.boat--5 {
+  top: 200px;
+  right: 240px;
+}
+
+.focused {
+  border: dashed 2px blue;
+  background-color: #f0f;
+}
+
+.popup-open {
+  border: #f0f solid 1px;
+  width: 430px;
+  height: 230px;
+  position: absolute;
+  left: 3.5%;
+  top: 6%;
+}
+.popup-open p {
+  color: red;
+  margin-top: 0.5em;
+}
+.popup-open .popup-in-popup-ocean {
+  border: black 1px solid;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.popup-open .popup-animal {
+  border: blue solid 1px;
+  width: 50px;
+  height: 50px;
 }
 
 /*# sourceMappingURL=main.css.map */
