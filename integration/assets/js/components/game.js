@@ -82,7 +82,7 @@ export function cardInit() {
                 // 1 DONE - Masquer la div no-popup
                 // 2 DONE - Présenter une div à l'utilisateur
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
-                // 4 IN PROGRESS - Insérer dans cette div des divs de chaque animal restant
+                // 4 DONE - Insérer dans cette div des divs de chaque animal restant
                 // 5 - Rendre cliquable les div animales
                 // 6 - ADE : au click :
                         // 1 - Faire disparaître la div de choix d'animal à libérer
@@ -124,7 +124,43 @@ export function cardInit() {
                     popupInPopupOcean.append(popupOctopus);
                     // J'ajoute à cette div la classe popup-animal
                     popupOctopus.classList.add('popup-animal');
+                    // Je rends la div cliquable en lui assignant un évènement 
+                    popupOctopus.addEventListener('click', octopusActions);
                 }
+                if(nbFish > 0){
+                    // Je crée la div pour l'animal courant
+                    let popupFish = document.createElement('div');
+                    // J'insère cette div animal dans la div popupInPopupOcean
+                    popupInPopupOcean.append(popupFish);
+                    // J'ajoute à cette div la classe popup-animal
+                    popupFish.classList.add('popup-animal');
+                }
+                if(nbShark > 0){
+                    // Je crée la div pour l'animal courant
+                    let popupShark = document.createElement('div');
+                    // J'insère cette div animal dans la div popupInPopupOcean
+                    popupInPopupOcean.append(popupShark);
+                    // J'ajoute à cette div la classe popup-animal
+                    popupShark.classList.add('popup-animal');
+                }
+                if(nbDolphin > 0){
+                    // Je crée la div pour l'animal courant
+                    let popupDolphin = document.createElement('div');
+                    // J'insère cette div animal dans la div popupInPopupOcean
+                    popupInPopupOcean.append(popupDolphin);
+                    // J'ajoute à cette div la classe popup-animal
+                    popupDolphin.classList.add('popup-animal');
+                }
+                if(nbTurtle > 0){
+                    // Je crée la div pour l'animal courant
+                    let popupTurtle = document.createElement('div');
+                    // J'insère cette div animal dans la div popupInPopupOcean
+                    popupInPopupOcean.append(popupTurtle);
+                    // J'ajoute à cette div la classe popup-animal
+                    popupTurtle.classList.add('popup-animal');
+                }
+
+                //* 
                 
             })();
 
