@@ -160,7 +160,8 @@ export function cardInit() {
                     popupTurtle.classList.add('popup-animal');
                 }
 
-                //* 
+                //* Au clique sur une des div animales, la fonction de cet animal s'active et la popupOcean disparait, et la div game-space réapparait
+                // 
                 
             })();
 
