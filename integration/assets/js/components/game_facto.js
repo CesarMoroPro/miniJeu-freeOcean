@@ -105,7 +105,6 @@ export function cardInit() {
                 popupInPopupOcean.append(popupAnimal);
                 // J'ajoute à cette div la classe popup-animal
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
-                console.log(popupAnimal);
                 // Je rends la div cliquable en lui assignant un évènement qui correspond à sa fonction d'action
                 // popupAnimal.addEventListener('click', animalAction(cardsList[i]));
 
@@ -116,58 +115,71 @@ export function cardInit() {
 
     //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
-        //? FONCTION N°1 : Suppression d'une pieuvre
-        (function freeOctopus(){
+       
+        // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
+        if(cardsList[2][1] > 0){
+
+             //? FONCTION N°1 : Suppression d'une pieuvre
+            (function freeOctopus(){
                         
-            // Récupération du premier élément Octopus
-            let octopusEl = document.querySelector('.octopus');
-            // Suppression de l'élément Octopus dans le code source 
-            //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
-            // node.removeChild(child)
-            net.removeChild(octopusEl);
-            // Je supprime une quantité de l'objet octopus
-            cardsList[2][1] -=1;
-        })();
+                // Récupération du premier élément Octopus
+                let octopusEl = document.querySelector('.octopus');
+                // Suppression de l'élément Octopus dans le code source 
+                //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
+                // node.removeChild(child)
+                net.removeChild(octopusEl);
+                // Je supprime une quantité de l'objet octopus
+                cardsList[2][1] -=1;
+            })();
 
-        //? FONCTION N°2 : Faire reculer le bateau d'une case
-        (function backBoat() {
-            
-            // On stocke dans une variable focusElement qui contient la classe "boat--0"
-            let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
+            //? FONCTION N°2 : Faire reculer le bateau d'une case
+            (function backBoat() {
+                
+                // On stocke dans une variable focusElement qui contient la classe "boat--0"
+                let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
 
-            // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true)
-            // Si le booléen est sur true, ou si l'élément courant contient la classe "boat--0",
-            // le bateau ne recule pas
-            if(boatPosition0 === false || focusedElementPosition0 == false){
-                // alors le bateau peut reculer
-                // J'utilise la variable globale focusedElement
-                // pour récupérer l'élément précédent
-                let previousFocusedElement = focusedElement.previousElementSibling;
-                // Je supprime la classe "focused" de l'élément courant
-                focusedElement.classList.remove("focused");
-                // J'ajoute la classe "focused" à son élément précédent
-                previousFocusedElement.classList.add("focused");
-                // J'attribue la valeur de l'élément précédent à la variable focusedElement
-                // pour qu'elle soit encore utilisable
-                focusedElement = previousFocusedElement;
-            }
-        })();
+                // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true)
+                // Si le booléen est sur true, ou si l'élément courant contient la classe "boat--0",
+                // le bateau ne recule pas
+                if(boatPosition0 === false || focusedElementPosition0 == false){
+                    // alors le bateau peut reculer
+                    // J'utilise la variable globale focusedElement
+                    // pour récupérer l'élément précédent
+                    let previousFocusedElement = focusedElement.previousElementSibling;
+                    // Je supprime la classe "focused" de l'élément courant
+                    focusedElement.classList.remove("focused");
+                    // J'ajoute la classe "focused" à son élément précédent
+                    previousFocusedElement.classList.add("focused");
+                    // J'attribue la valeur de l'élément précédent à la variable focusedElement
+                    // pour qu'elle soit encore utilisable
+                    focusedElement = previousFocusedElement;
+                }
+            })();
+        }
     }
 
-    //* Lorsqu'une autre carte sera tirée, son action se déclenchera
+    //* Lorsqu'une autre carte sera tirée (poisson, tortue, requin ou dauphin), son action se déclenchera
     function animalAction(param) {
-               
-            // Récupération du premier élément de chaque animal restant
-            let fishEl = document.querySelector('.fish');
-            let sharkEl = document.querySelector('.shark');
-            let dolphinEl = document.querySelector('.dolphin');
-            let turtleEl = document.querySelector('.turtle');
-            // Suppression de l'élément courant dans le code source
-            //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
-            // node.removeChild(child)
-            net.removeChild(cardsList[param]+'El');
-            // Je supprime une quantité de l'objet animal
-            cardsList[param][1] -=1;
+           
+        // Je boucle sur le tableau à partir de la TORTUE (index 3)
+        for(let i = 3; i < cardsList.length; i++){
+
+            // Si la quantité de l'élément est supérieur à 0 ET si l'index du tableau parcouru vaut le paramètre randomCard
+            if(cardsList[i][1] > 0 && i === param) {
+
+                // Alors je stocke les éléments ayant la classe correspondant à l'index 0 de randomCard (soit la valeur nom)
+                // J'utilise query selector pour obtenir une node list
+                let elementsToRemove = document.querySelectorAll('.' + cardsList[i][0]);
+                // Je supprime un élément de cette liste
+                //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
+                // D'où l'intérêt d'avoir récupéré ces éléments en node list avec query selector
+                // node.removeChild(child)
+                net.removeChild(elementsToRemove[0]);
+                // Puis je supprime une quantité de l'animal retiré
+                cardsList[param][1] -= 1;
+                console.log(cardsList[param][1]);
+            }
+        }
     }
 
 
