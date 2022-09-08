@@ -59,7 +59,7 @@ export function cardInit() {
                 // 2 DONE - Présenter une div à l'utilisateur
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
                 // 4 DONE - Insérer dans cette div des divs de chaque animal restant
-                // 5 - Rendre cliquable les div animales
+                // 5 DONE - Rendre cliquable les div animales
                 // 6 - ADE : au click :
                     // 1 - Faire disparaître la div de choix d'animal à libérer
                     // 2 - Lancer la fonction correspondante selon l'animal cliqué
@@ -105,8 +105,36 @@ export function cardInit() {
                 popupInPopupOcean.append(popupAnimal);
                 // J'ajoute à cette div la classe popup-animal
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
-                // Je rends la div cliquable en lui assignant un évènement qui correspond à sa fonction d'action
-                // popupAnimal.addEventListener('click', animalAction(cardsList[i]));
+                popupAnimal.textContent = cardsList[i][0];
+
+                //* - Rendre cliquables les divs animales
+                // // Indépendemment, je fais de même pour les pieuvres
+                // let allOctopuses = document.querySelector('.octopus');
+                // // Je boucle sur le tableau fourni pour les pieuvres
+                // allOctopuses.forEach(element => {
+                //     element.addEventListener('click', () => {
+                //         // Pour chaque élément pieuvre, j'ajoute un écouteur au clic
+                //         // Je ferme la div océan
+                //         popupOcean.remove();
+                //         // Je rends visible la div "no-popup"
+                //         noPopup.classList.remove("inactive");
+                //         // Et je déclenche la fonction de la pieuvre
+                //         octopusAction();
+                //     });
+                // });
+
+                // Afin de pouvoir boucler sur un tableau, je récupère toutes les divs qui ont la classe "popup-animal"
+                let allDivsAnimals = document.getElementsByClassName('popup-animal');
+                allDivsAnimals.addEventListener('click', () => {
+                    // Je ferme la div océan
+                    popupOcean.remove();
+                    // Je rends visible la div "no-popup"
+                    noPopup.classList.remove("inactive");
+                    // Et l'action se déclenche en fonction de l'animal cliqué
+                    if(div.classList.contains(cardsList[i][2])){
+                        animalAction(cardsList[i]);
+                    }
+                })
 
                 
             }
@@ -177,7 +205,6 @@ export function cardInit() {
                 net.removeChild(elementsToRemove[0]);
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
-                console.log(cardsList[param][1]);
             }
         }
     }
@@ -212,7 +239,7 @@ export function cardInit() {
         let resultCardDiv       = document.querySelector('#resultCard');
 
         // J'incrémente le contenu de ma variable dans ma div
-        resultCardDiv.textContent = randomCard;
+        resultCardDiv.textContent = cardsList[randomCard][0];
         // Et je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
         setTimeout(actions(randomCard), 500);
     }

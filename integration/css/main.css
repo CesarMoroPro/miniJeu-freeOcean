@@ -388,5 +388,8 @@ body h2 {
   width: 80px;
   height: 80px;
 }
+.popup-open .popup-animal:hover {
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=main.css.map */
