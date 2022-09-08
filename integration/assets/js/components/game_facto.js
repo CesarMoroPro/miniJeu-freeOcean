@@ -13,16 +13,16 @@ export function cardInit() {
     let randomCard;
     // Bouton Draw a card
     let newCardBtn          = document.querySelector('.cardBtn');
-    // Tableau contenant tous les "personnages" du jeu et leur quantité
+    // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source
     let cardsList           = 
                             [
-                                ['boat', 1],
+                                ['boat', 1,],
                                 ['ocean', 1],
-                                ['octopus', 2],
-                                ['turtle', 4],
-                                ['fish', 8],
-                                ['shark', 3],
-                                ['dolphin', 3]
+                                ['octopus', 2, 'octopus'], // ['nom, quantité, classe html]
+                                ['turtle', 4, 'turtle'],
+                                ['fish', 8, 'fish'],
+                                ['shark', 3, 'shark'],
+                                ['dolphin', 3, 'dolphin']
                             ]
 
 
@@ -104,9 +104,12 @@ export function cardInit() {
                 // J'insère cette div animal dans la div popupInPopupOcean
                 popupInPopupOcean.append(popupAnimal);
                 // J'ajoute à cette div la classe popup-animal
-                popupAnimal.classList.add('popup-animal');
-                // Je rends la div cliquable en lui assignant un évènement qui correspond à son fonction d'action
+                popupAnimal.classList.add('popup-animal', cardsList[i][2]);
+                console.log(popupAnimal);
+                // Je rends la div cliquable en lui assignant un évènement qui correspond à sa fonction d'action
                 // popupAnimal.addEventListener('click', animalAction(cardsList[i]));
+
+                
             }
         }
     }
