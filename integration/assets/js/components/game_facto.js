@@ -59,7 +59,7 @@ export function cardInit() {
                 // 2 DONE - Présenter une div à l'utilisateur
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
                 // 4 DONE - Insérer dans cette div des divs de chaque animal restant
-                // 5 DONE - Rendre cliquable les div animales
+                // 5 - Rendre cliquable les div animales
                 // 6 - ADE : au click :
                     // 1 - Faire disparaître la div de choix d'animal à libérer
                     // 2 - Lancer la fonction correspondante selon l'animal cliqué
@@ -107,7 +107,7 @@ export function cardInit() {
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
                 popupAnimal.textContent = cardsList[i][0];
 
-                //* - Rendre cliquables les divs animales
+                //* 5 - Rendre cliquables les divs animales
                 // // Indépendemment, je fais de même pour les pieuvres
                 // let allOctopuses = document.querySelector('.octopus');
                 // // Je boucle sur le tableau fourni pour les pieuvres
