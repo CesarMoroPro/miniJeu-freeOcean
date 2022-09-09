@@ -363,6 +363,10 @@ body h2 {
   background-color: #f0f;
 }
 
+.no-more-animals {
+  text-align: center;
+}
+
 .popup-open {
   width: 430px;
   height: 230px;

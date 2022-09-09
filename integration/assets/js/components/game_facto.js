@@ -9,6 +9,8 @@ export function cardInit() {
     let focusedElement      = document.querySelector('.focused');
     // Filet
     let net                 = document.querySelector('#net');
+    // Div game-space
+    let gameSpace = document.getElementById('game-space');
     // Random number représentant un index du tableau cardsList
     let randomCard;
     // Bouton Draw a card
@@ -55,6 +57,7 @@ export function cardInit() {
 
         //* L'action Océan consiste à laisser le choix à l'utilisateur : quel animal restant il veut libérer.
             // Il faut donc :
+                // 0 DONE - Désactiver le clic sur ma bouton pour tirer une carte
                 // 1 DONE - Masquer la div no-popup
                 // 2 DONE - Présenter une div à l'utilisateur
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
@@ -63,6 +66,11 @@ export function cardInit() {
                 // 6 - ADE : au click :
                     // 1 - Faire disparaître la div de choix d'animal à libérer
                     // 2 - Lancer la fonction correspondante selon l'animal cliqué
+                    // 3 - Réactiver le clic sur le bouton pour tirer une carte
+
+        //* 0 - Désactiver le clic sur le bouton "tirer une carte"
+        // Supprimer l'écouteur d'événement
+        newCardBtn.removeEventListener('click', handleRandomCard);
         
         //* 1 - Masquer la div no-popup
         // Je récupère la div no-popup
@@ -73,9 +81,7 @@ export function cardInit() {
         //* 2 - Présenter une div à l'utilisateur
         // Je crée une nouvelle div
         let popupOcean = document.createElement('div');
-        // Je récupère la div game-space
         // J'insère cette nouvelle div noPopup dans la div gameSpace
-        let gameSpace = document.getElementById('game-space');
         gameSpace.append(popupOcean);
         // J'ajoute à cette nouvelle div créée la classe popup-open
         popupOcean.classList.add('popup-open');
@@ -86,11 +92,11 @@ export function cardInit() {
 
         //* 3 - Insérer dans la div popupOcean une div sous le titre
         // Je crée une nouvelle div destinnée à contenir les animaux encore en jeu dans la div popupOcean
-        let popupInPopupOcean = document.createElement('div');
+        let popupInPopupOceanUnderTitle = document.createElement('div');
         // J'insère cette nouvelle div dans la div popupOcean après le titre
-        popupOceanTitle.append(popupInPopupOcean);
+        popupOceanTitle.append(popupInPopupOceanUnderTitle);
         // J'ajoute la classe popup-in-popup-ocean
-        popupInPopupOcean.classList.add('popup-in-popup-ocean')
+        popupInPopupOceanUnderTitle.classList.add('popup-in-popup-ocean')
 
         //* 4 - Insertion des animaux restants
         // Je boucle sur le tableau à partir de la PIEUVRE (index 2)
@@ -101,13 +107,15 @@ export function cardInit() {
                 
                 // Alors la div de l'élément [i] peut être créée dans la popup
                 let popupAnimal = document.createElement('div');
-                // J'insère cette div animal dans la div popupInPopupOcean
-                popupInPopupOcean.append(popupAnimal);
-                // J'ajoute à cette div la classe popup-animal
+                // J'insère cette div animal dans la div popupInPopupOceanUnderTitle
+                popupInPopupOceanUnderTitle.append(popupAnimal);
+                // J'ajoute à cette div la classe popup-animal, et la classe "nom de l'animal"
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
                 popupAnimal.textContent = cardsList[i][0];
 
                 //* 5 - Rendre cliquables les divs animales
+
+
                 // // Indépendemment, je fais de même pour les pieuvres
                 // let allOctopuses = document.querySelector('.octopus');
                 // // Je boucle sur le tableau fourni pour les pieuvres
@@ -124,32 +132,57 @@ export function cardInit() {
                 // });
 
                 // Afin de pouvoir boucler sur un tableau, je récupère toutes les divs qui ont la classe "popup-animal"
-                let allDivsAnimals = document.getElementsByClassName('popup-animal');
-                allDivsAnimals.addEventListener('click', () => {
-                    // Je ferme la div océan
-                    popupOcean.remove();
-                    // Je rends visible la div "no-popup"
-                    noPopup.classList.remove("inactive");
-                    // Et l'action se déclenche en fonction de l'animal cliqué
-                    if(div.classList.contains(cardsList[i][2])){
-                        animalAction(cardsList[i]);
-                    }
-                })
-
-                
+                // let allDivsAnimals = document.getElementsByClassName('popup-animal');
+                // allDivsAnimals.addEventListener('click', () => {
+                //     // Je ferme la div océan
+                //     popupOcean.remove();
+                //     // Je rends visible la div "no-popup"
+                //     noPopup.classList.remove("inactive");
+                //     // Et l'action se déclenche en fonction de l'animal cliqué
+                //     if(div.classList.contains(cardsList[i][2])){
+                //         animalAction(cardsList[i]);
+                //     }
+                // })
             }
         }
     }
 
     //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
-       
+
         // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
+        //? STEP 1 : Faire reculer OU NON le bateau selon sa position ou s'il reste des pieuvres
+        (function backBoat() {
+
+            // On stocke dans une variable focusElement qui contient la classe "boat--0"
+            let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
+
+            // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true) et il doit encore y avoir une pieuvre à libérer
+            // Si la quantité de pieuvre est > 0
+            // ET Si le booléen est sur false, 
+            // OU si l'élément courant ne contient pas la classe "boat--0",
+            // le bateau peut reculer
+            if(cardsList[2][1] > 0 && boatPosition0 === false || focusedElementPosition0 == false){
+                // alors le bateau peut reculer
+                // J'utilise la variable globale focusedElement
+                // pour récupérer l'élément précédent
+                let previousFocusedElement = focusedElement.previousElementSibling;
+                // Je supprime la classe "focused" de l'élément courant
+                focusedElement.classList.remove("focused");
+                // J'ajoute la classe "focused" à son élément précédent
+                previousFocusedElement.classList.add("focused");
+                // J'attribue la valeur de l'élément précédent à la variable focusedElement
+                // pour qu'elle soit encore utilisable
+                focusedElement = previousFocusedElement;
+            } else if(focusedElementPosition0 === true){
+                focusedElement = focusedElement;
+            }
+        })();
+        
+        //? STEP 2 : Suppression d'une pieuvre OU Création d'une div alerte
         if(cardsList[2][1] > 0){
 
-             //? FONCTION N°1 : Suppression d'une pieuvre
-            (function freeOctopus(){
-                        
+            (function freeOctopus(){ // Suppression d'une pieuvre
                 // Récupération du premier élément Octopus
                 let octopusEl = document.querySelector('.octopus');
                 // Suppression de l'élément Octopus dans le code source 
@@ -159,30 +192,38 @@ export function cardInit() {
                 // Je supprime une quantité de l'objet octopus
                 cardsList[2][1] -=1;
             })();
+        } else { // Création d'une alerte
+            //* 0 - Désactiver le clic sur le bouton "tirer une carte"
+            // Supprimer l'écouteur d'événement
+            newCardBtn.removeEventListener('click', handleRandomCard);
+            
+            //* 1 - Masquer la div no-popup
+            // Je récupère la div no-popup
+            let noPopup = document.getElementById('no-popup');
+            // Masque cette div
+            noPopup.classList.add('inactive');
 
-            //? FONCTION N°2 : Faire reculer le bateau d'une case
-            (function backBoat() {
-                
-                // On stocke dans une variable focusElement qui contient la classe "boat--0"
-                let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
-
-                // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true)
-                // Si le booléen est sur true, ou si l'élément courant contient la classe "boat--0",
-                // le bateau ne recule pas
-                if(boatPosition0 === false || focusedElementPosition0 == false){
-                    // alors le bateau peut reculer
-                    // J'utilise la variable globale focusedElement
-                    // pour récupérer l'élément précédent
-                    let previousFocusedElement = focusedElement.previousElementSibling;
-                    // Je supprime la classe "focused" de l'élément courant
-                    focusedElement.classList.remove("focused");
-                    // J'ajoute la classe "focused" à son élément précédent
-                    previousFocusedElement.classList.add("focused");
-                    // J'attribue la valeur de l'élément précédent à la variable focusedElement
-                    // pour qu'elle soit encore utilisable
-                    focusedElement = previousFocusedElement;
-                }
-            })();
+            //* 2 - Créer la nouvelle div et son contenu
+            // Je crée une nouvelle div de message d'alerte
+            let alert = document.createElement('div');
+            // Je lui donne une classe
+            alert.classList.add('popup-open');
+            // J'ajoute dans cette div le texte de l'alerte
+            alert.textContent = "There is no more octopus to free";
+            
+            //* 3 - Insérer cette div
+            gameSpace.append(alert);
+            // Je change le curseur pour signaler à l'utilisateur que l'alerte est entièrement cliquable
+            alert.style.cursor="pointer";
+            // J'ajoute un événement au clic sur l'alerte
+            alert.addEventListener('click', () => {
+                // Je supprime la div alert
+                alert.remove();
+                // Et je supprime la classe inactive de noPopup pour que le plateau de jeu soit de nouveau visible
+                noPopup.classList.remove('inactive');
+                // Réactiver le clic sur le bouton "tirer une carte"
+                newCardBtn.addEventListener('click', handleRandomCard);
+            })
         }
     }
 
@@ -205,8 +246,40 @@ export function cardInit() {
                 net.removeChild(elementsToRemove[0]);
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
+            } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
+                //* 0 - Désactiver le clic sur le bouton "tirer une carte"
+                // Supprimer l'écouteur d'événement
+                newCardBtn.removeEventListener('click', handleRandomCard);
+                
+                //* 1 - Masquer la div no-popup
+                // Je récupère la div no-popup
+                let noPopup = document.getElementById('no-popup');
+                // Masque cette div
+                noPopup.classList.add('inactive');
+    
+                //* 2 - Créer la nouvelle div et son contenu
+                // Je crée une nouvelle div de message d'alerte
+                let alert = document.createElement('div');
+                // Je lui donne une classe
+                alert.classList.add('popup-open');
+                // J'ajoute dans cette div le texte de l'alerte
+                alert.textContent = "There is no more " + cardsList[randomCard][0] + " to free";
+                
+                //* 3 - Insérer cette div
+                gameSpace.append(alert);
+                // Je change le curseur pour signaler à l'utilisateur que l'alerte est entièrement cliquable
+                alert.style.cursor="pointer";
+                // J'ajoute un événement au clic sur l'alerte
+                alert.addEventListener('click', () => {
+                    // Je supprime la div alert
+                    alert.remove();
+                    // Et je supprime la classe inactive de noPopup pour que le plateau de jeu soit de nouveau visible
+                    noPopup.classList.remove('inactive');
+                    // Réactiver le clic sur le bouton "tirer une carte"
+                    newCardBtn.addEventListener('click', handleRandomCard);
+                })
             }
-        }
+        } 
     }
 
 
