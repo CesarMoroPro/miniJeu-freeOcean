@@ -116,41 +116,24 @@ export function cardInit() {
                 popupAnimal.textContent = cardsList[i][0];
 
                 //* 5 - Rendre cliquables les divs animales
-                
-
-                // // Indépendemment, je fais de même pour les pieuvres
-                // let allOctopuses = document.querySelector('.octopus');
-                // // Je boucle sur le tableau fourni pour les pieuvres
-                // allOctopuses.forEach(element => {
-                //     element.addEventListener('click', () => {
-                //         // Pour chaque élément pieuvre, j'ajoute un écouteur au clic
-                //         // Je ferme la div océan
-                //         popupOcean.remove();
-                //         // Je rends visible la div "no-popup"
-                //         noPopup.classList.remove("inactive");
-                //         // Et je déclenche la fonction de la pieuvre
-                //         octopusAction();
-                //     });
-                // });
-
-                // Afin de pouvoir boucler sur un tableau, je récupère toutes les divs qui ont la classe "popup-animal"
-                // let allDivsAnimals = document.getElementsByClassName('popup-animal');
-                // allDivsAnimals.addEventListener('click', () => {
-                //     // Je ferme la div océan
-                //     popupOcean.remove();
-                //     // Je rends visible la div "no-popup"
-                //     noPopup.classList.remove("inactive");
-                //     // Et l'action se déclenche en fonction de l'animal cliqué
-                //     if(div.classList.contains(cardsList[i][2])){
-                //         animalAction(cardsList[i]);
-                //     }
-                // })
+                popupAnimal.addEventListener('click', () => {
+                    popupOcean.remove();
+                    noPopup.classList.remove('inactive');
+                    newCardBtn.classList.remove('desactivated');
+                    newCardBtn.addEventListener('click', handleRandomCard );
+                    if(popupAnimal.classList.contains('octopus')){
+                        octopusAction();
+                    } else {
+                        animalAction(i);
+                    }
+                })
             }
         }
     }
 
     //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
+        console.log('%c' + "on est ici dans animal action", 'color: red; font-size: 1.5rem');
 
         // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
         //? STEP 1 : Faire reculer OU NON le bateau selon sa position ou s'il reste des pieuvres
@@ -176,6 +159,7 @@ export function cardInit() {
                 // J'attribue la valeur de l'élément précédent à la variable focusedElement
                 // pour qu'elle soit encore utilisable
                 focusedElement = previousFocusedElement;
+                console.log('%c' + "Il a reculé", 'color: red; font-size: 1.5rem');
             } else if(focusedElementPosition0 === true){
                 focusedElement = focusedElement;
             }
@@ -193,6 +177,7 @@ export function cardInit() {
                 net.removeChild(octopusEl);
                 // Je supprime une quantité de l'objet octopus
                 cardsList[2][1] -=1;
+                console.log(cardsList[2][0] + ' => ' + cardsList[2][1]);
             })();
         } else { // Création d'une alerte
             //* 0 - Désactiver le clic sur le bouton "tirer une carte"
@@ -248,6 +233,7 @@ export function cardInit() {
                 net.removeChild(elementsToRemove[0]);
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
+
             } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
                 //* 0 - Désactiver le clic sur le bouton "tirer une carte"
                 // Supprimer l'écouteur d'événement
@@ -309,6 +295,8 @@ export function cardInit() {
     //! STEP 3 ==============================================================================================
     //* Déclaration de la fonction HANDLER
     function handleRandomCard() {
+        console.log(cardsList[2][0] + ' => ' + cardsList[2][1]);
+
             
         randomCard              = Math.floor(Math.random() * (cardsList.length));
         let resultCardDiv       = document.querySelector('#resultCard');
