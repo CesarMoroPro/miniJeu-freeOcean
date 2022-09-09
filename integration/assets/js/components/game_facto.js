@@ -120,9 +120,10 @@ export function cardInit() {
                     popupOcean.remove();
                     noPopup.classList.remove('inactive');
                     newCardBtn.classList.remove('desactivated');
-                    newCardBtn.addEventListener('click', handleRandomCard );
+                    newCardBtn.addEventListener('click', handleRandomCard);
                     if(popupAnimal.classList.contains('octopus')){
                         octopusAction();
+                        console.log("go vers octopusAction()");
                     } else {
                         animalAction(i);
                     }
@@ -133,18 +134,25 @@ export function cardInit() {
 
     //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
-        console.log('%c' + "on est ici dans animal action", 'color: red; font-size: 1.5rem');
 
         // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
         //? STEP 1 : Faire reculer OU NON le bateau selon sa position ou s'il reste des pieuvres
         (function backBoat() {
+            console.log("On est dans backBoat()");
 
             // On stocke dans une variable focusElement qui contient la classe "boat--0"
             let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
 
+            // if(boatPosition0 === false && focusedElementPosition0 == true){
+            //     boatPosition0 = true;
+            // }
+
+
+
+
             // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true) et il doit encore y avoir une pieuvre à libérer
             // Si la quantité de pieuvre est > 0
-            // ET Si le booléen est sur false, 
+            // ET Si le booléen est sur false, donc pas en position initiale,
             // OU si l'élément courant ne contient pas la classe "boat--0",
             // le bateau peut reculer
             if(cardsList[2][1] > 0 && boatPosition0 === false || focusedElementPosition0 == false){
@@ -159,9 +167,11 @@ export function cardInit() {
                 // J'attribue la valeur de l'élément précédent à la variable focusedElement
                 // pour qu'elle soit encore utilisable
                 focusedElement = previousFocusedElement;
-                console.log('%c' + "Il a reculé", 'color: red; font-size: 1.5rem');
-            } else if(focusedElementPosition0 === true){
-                focusedElement = focusedElement;
+                if(focusedElementPosition0 == true){
+                    boatPosition0 = true;
+                }
+            } else if(cardsList[2][1] === 0 || boatPosition0 === true || focusedElementPosition0 === true){
+                console.log("Le bateau n'est pas censé reculer");
             }
         })();
         
@@ -177,7 +187,6 @@ export function cardInit() {
                 net.removeChild(octopusEl);
                 // Je supprime une quantité de l'objet octopus
                 cardsList[2][1] -=1;
-                console.log(cardsList[2][0] + ' => ' + cardsList[2][1]);
             })();
         } else { // Création d'une alerte
             //* 0 - Désactiver le clic sur le bouton "tirer une carte"
@@ -295,8 +304,6 @@ export function cardInit() {
     //! STEP 3 ==============================================================================================
     //* Déclaration de la fonction HANDLER
     function handleRandomCard() {
-        console.log(cardsList[2][0] + ' => ' + cardsList[2][1]);
-
             
         randomCard              = Math.floor(Math.random() * (cardsList.length));
         let resultCardDiv       = document.querySelector('#resultCard');
