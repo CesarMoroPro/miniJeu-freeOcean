@@ -62,11 +62,11 @@ export function cardInit() {
                 // 2 DONE - Présenter une div à l'utilisateur
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
                 // 4 DONE - Insérer dans cette div des divs de chaque animal restant
-                // 5 - Rendre cliquable les div animales
-                // 6 - ADE : au click :
-                    // 1 - Faire disparaître la div de choix d'animal à libérer
-                    // 2 - Lancer la fonction correspondante selon l'animal cliqué
-                    // 3 - Réactiver le clic sur le bouton pour tirer une carte
+                // 5 DONE - Rendre cliquable les div animales
+                // 6 DONE - ADE : au click :
+                    // 1 DONE - Faire disparaître la div de choix d'animal à libérer
+                    // 2 DONE - Lancer la fonction correspondante selon l'animal cliqué
+                    // 3 DONE - Réactiver le clic sur le bouton pour tirer une carte
 
         //* 0 - Désactiver le clic sur le bouton "tirer une carte"
         // Supprimer l'écouteur d'événement
@@ -123,7 +123,6 @@ export function cardInit() {
                     newCardBtn.addEventListener('click', handleRandomCard);
                     if(popupAnimal.classList.contains('octopus')){
                         octopusAction();
-                        console.log("go vers octopusAction()");
                     } else {
                         animalAction(i);
                     }
@@ -135,45 +134,38 @@ export function cardInit() {
     //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
 
-        // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
-        //? STEP 1 : Faire reculer OU NON le bateau selon sa position ou s'il reste des pieuvres
-        (function backBoat() {
-            console.log("On est dans backBoat()");
+        if(cardsList[2][1] > 0){
+            // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
+            //? STEP 1 : Faire reculer OU NON le bateau selon sa position
+            (function backBoat() {
+                console.log('%c' + "dans backBoat()", 'color: red; font-size: 1.5rem');
 
-            // On stocke dans une variable focusElement qui contient la classe "boat--0"
-            let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
+                // On stocke dans une variable focusElement qui contient la classe "boat--0"
+                let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
 
-            // if(boatPosition0 === false && focusedElementPosition0 == true){
-            //     boatPosition0 = true;
-            // }
-
-
-
-
-            // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true) et il doit encore y avoir une pieuvre à libérer
-            // Si la quantité de pieuvre est > 0
-            // ET Si le booléen est sur false, donc pas en position initiale,
-            // OU si l'élément courant ne contient pas la classe "boat--0",
-            // le bateau peut reculer
-            if(cardsList[2][1] > 0 && boatPosition0 === false || focusedElementPosition0 == false){
-                // alors le bateau peut reculer
-                // J'utilise la variable globale focusedElement
-                // pour récupérer l'élément précédent
-                let previousFocusedElement = focusedElement.previousElementSibling;
-                // Je supprime la classe "focused" de l'élément courant
-                focusedElement.classList.remove("focused");
-                // J'ajoute la classe "focused" à son élément précédent
-                previousFocusedElement.classList.add("focused");
-                // J'attribue la valeur de l'élément précédent à la variable focusedElement
-                // pour qu'elle soit encore utilisable
-                focusedElement = previousFocusedElement;
-                if(focusedElementPosition0 == true){
-                    boatPosition0 = true;
-                }
-            } else if(cardsList[2][1] === 0 || boatPosition0 === true || focusedElementPosition0 === true){
-                console.log("Le bateau n'est pas censé reculer");
-            }
-        })();
+                // Pour faire reculer le bateau, il ne doit pas être en position 0 (donc pas en true) et il doit encore y avoir une pieuvre à libérer
+                // Si la quantité de pieuvre est > 0
+                // ET Si le booléen est sur false, donc pas en position initiale,
+                // OU si l'élément courant ne contient pas la classe "boat--0",
+                // le bateau peut reculer
+                if(boatPosition0 === false || focusedElementPosition0 == false){
+                    // alors le bateau peut reculer
+                    // J'utilise la variable globale focusedElement
+                    // pour récupérer l'élément précédent
+                    let previousFocusedElement = focusedElement.previousElementSibling;
+                    // Je supprime la classe "focused" de l'élément courant
+                    focusedElement.classList.remove("focused");
+                    // J'ajoute la classe "focused" à son élément précédent
+                    previousFocusedElement.classList.add("focused");
+                    // J'attribue la valeur de l'élément précédent à la variable focusedElement
+                    // pour qu'elle soit encore utilisable
+                    focusedElement = previousFocusedElement;
+                    if(focusedElementPosition0 == true){
+                        boatPosition0 = true;
+                    };
+                };
+            })();
+        };
         
         //? STEP 2 : Suppression d'une pieuvre OU Création d'une div alerte
         if(cardsList[2][1] > 0){
@@ -188,7 +180,8 @@ export function cardInit() {
                 // Je supprime une quantité de l'objet octopus
                 cardsList[2][1] -=1;
             })();
-        } else { // Création d'une alerte
+        } else if(cardsList[2][1] === 0){ 
+            // Création d'une alerte
             //* 0 - Désactiver le clic sur le bouton "tirer une carte"
             // Supprimer l'écouteur d'événement
             newCardBtn.removeEventListener('click', handleRandomCard);
@@ -272,7 +265,7 @@ export function cardInit() {
                     alert.remove();
                     // Et je supprime la classe inactive de noPopup pour que le plateau de jeu soit de nouveau visible
                     noPopup.classList.remove('inactive');
-                    // Réactiver le clic sur le bouton "tirer une carte"
+                    // Je réactive le clic sur le bouton "tirer une carte"
                     newCardBtn.addEventListener('click', handleRandomCard);
                 })
             }
@@ -311,6 +304,7 @@ export function cardInit() {
         // J'incrémente le contenu de ma variable dans ma div
         resultCardDiv.textContent = cardsList[randomCard][0];
         // Et je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
+        // Juste histoire d'améliorer l'UX
         setTimeout(actions(randomCard), 500);
     }
 
