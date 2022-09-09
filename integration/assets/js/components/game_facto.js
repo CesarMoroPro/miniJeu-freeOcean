@@ -71,6 +71,8 @@ export function cardInit() {
         //* 0 - Désactiver le clic sur le bouton "tirer une carte"
         // Supprimer l'écouteur d'événement
         newCardBtn.removeEventListener('click', handleRandomCard);
+        newCardBtn.style.cursor="default";
+        newCardBtn.classList.add('desactivated');
         
         //* 1 - Masquer la div no-popup
         // Je récupère la div no-popup
@@ -114,7 +116,7 @@ export function cardInit() {
                 popupAnimal.textContent = cardsList[i][0];
 
                 //* 5 - Rendre cliquables les divs animales
-
+                
 
                 // // Indépendemment, je fais de même pour les pieuvres
                 // let allOctopuses = document.querySelector('.octopus');

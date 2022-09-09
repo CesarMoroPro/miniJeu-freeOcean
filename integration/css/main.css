@@ -132,6 +132,13 @@ body h2 {
   color: white;
   cursor: pointer;
 }
+#starting #click-player #btn.desactivated {
+  background-color: #a3a3a3;
+}
+#starting #click-player #btn.desactivated:hover {
+  background-color: #a3a3a3;
+  color: black;
+}
 #starting #click-player #result #resultCard {
   margin-top: 1em;
   border: solid 1px black;

@@ -41,6 +41,15 @@
                 cursor: pointer;
             }
 
+            #btn.desactivated {
+                background-color: #a3a3a3;
+            }
+
+            #btn.desactivated:hover {
+                background-color: #a3a3a3;
+                color: black;
+            }
+
         #result {
 
             #resultCard {
