@@ -119,23 +119,23 @@ body h2 {
 #starting #click-player .click-design {
   margin: 1em 2em;
 }
-#starting #click-player #btn {
+#starting #click-player .btn {
   background-color: rgba(128, 0, 128, 0.3);
   width: 80px;
   padding: 0.5em;
   border-radius: 35px;
   border: rgb(128, 0, 128) 1px solid;
 }
-#starting #click-player #btn:hover {
+#starting #click-player .btn:hover {
   background-color: rgb(128, 0, 128);
   border: solid 1px rgb(63, 0, 63);
   color: white;
   cursor: pointer;
 }
-#starting #click-player #btn.desactivated {
+#starting #click-player .btn.desactivated {
   background-color: #a3a3a3;
 }
-#starting #click-player #btn.desactivated:hover {
+#starting #click-player .btn.desactivated:hover {
   background-color: #a3a3a3;
   color: black;
 }
@@ -184,7 +184,6 @@ body h2 {
   width: 200px;
   height: 200px;
 }
-
 @media (min-width: 720px) {
   #click-player {
     flex-direction: row;

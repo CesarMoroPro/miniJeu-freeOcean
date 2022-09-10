@@ -37,6 +37,35 @@ export function cardInit() {
     // Donc ici, total = 20
 
 
+    //! STEP 6 ==============================================================================================
+    function winAndStopGame() {
+        
+        // Je cache le bouton pour tirer une carte
+        newCardBtn.classList.add('inactive');
+        // Je cache le plateau de jeu
+        noPopup.classList.add('inactive');
+        // Je crée une div
+        let winDiv = document.createElement('div');
+        // J'ajoute la div dans gameSpace
+        gameSpace.append(winDiv);
+        // J'ajoute du texte
+        winDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"replay\">Rejouer</p>";
+        // Je récupère l'élément dont la classe est "replay"
+        let replay = document.querySelector('.replay');
+        replay.classList.add('replay-btn')
+        // AEL : au click
+        replay.addEventListener('click', () => {
+            // Je supprime la div winDiv
+            winDiv.remove();
+            // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
+            let startBtn = document.querySelector('startBtn');
+            startBtn.classList.remove('inactive');
+        });
+    }
+    
+            
+
+
     //! STEP 5 ==============================================================================================
     //* Déclaration des FONCTIONS D'ACTIONS des personnages
 
@@ -200,7 +229,9 @@ export function cardInit() {
                 // Je supprime une quantité de l'objet octopus
                 cardsList[2][1] -= 1;
                 total -= 1;
-                return total;
+                if(total === 0){
+                    winAndStopGame();
+                }
             })();
         } else if(cardsList[2][1] === 0){ 
             // Création d'une alerte
@@ -258,7 +289,9 @@ export function cardInit() {
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
                 total -= 1;
-                return total;
+                if(total === 0){
+                    winAndStopGame();
+                }
 
             } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
                 //* 0 - Désactiver le clic sur le bouton "tirer une carte"
@@ -318,32 +351,7 @@ export function cardInit() {
     //! STEP 3 ==============================================================================================
     //*  Déclaration de la fonction TOTAL
     function handleTotal(){
-        if(total > 0){
             handleRandomCard();
-            console.log(total);
-        } else {
-            // Si la quantité est à 0, le joueur gagne
-            // Je cache le bouton pour tirer une carte
-            newCardBtn.classList.add('inactive');
-            // Je cache le plateau de jeu
-            noPopup.classList.add('inactive');
-            // Je crée une div
-            let winDiv = document.createElement('div');
-            // J'ajoute la div dans gameSpace
-            gameSpace.append(winDiv);
-            // J'ajoute du texte
-            winDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"replay\">Rejouer</p>";
-            // Je récupère l'élément dont la classe est "replay"
-            let replay = document.querySelector('.replay');
-            // AEL : au click
-            replay.addEventListener('click', () => {
-                // Je supprime la div winDiv
-                winDiv.remove();
-                // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
-                let startBtn = document.querySelector('startBtn');
-                startBtn.classList.remove('inactive');
-            });
-        } 
     }
     
     //* Déclaration de la fonction RANDOM CARD
