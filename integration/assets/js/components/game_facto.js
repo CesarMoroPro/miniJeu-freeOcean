@@ -11,23 +11,30 @@ export function cardInit() {
     let net                 = document.querySelector('#net');
     // Div game-space
     let gameSpace = document.getElementById('game-space');
+    // Je récupère la div no-popup
+    let noPopup = document.getElementById('no-popup');
     // Random number représentant un index du tableau cardsList
     let randomCard;
     // Bouton Draw a card
     let newCardBtn          = document.querySelector('.cardBtn');
-    // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source
+    // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source et leur nom en français
     let cardsList           = 
                             [
-                                ['boat', 1,],
-                                ['ocean', 1],
-                                ['octopus', 2, 'octopus'], // ['nom, quantité, classe html]
-                                ['turtle', 4, 'turtle'],
-                                ['fish', 8, 'fish'],
-                                ['shark', 3, 'shark'],
-                                ['dolphin', 3, 'dolphin']
-                            ]
-
-
+                                ['boat', 1, '', 'bateau'],
+                                ['ocean', 1, '', 'océan'],
+                                ['octopus', 2, 'octopus', 'pieuvre'], // ['nom, quantité, classe html, nom en français]
+                                ['turtle', 4, 'turtle', 'tortue'],
+                                ['fish', 8, 'fish', 'poisson'],
+                                ['shark', 3, 'shark', 'requin'],
+                                ['dolphin', 3, 'dolphin', 'dauphin']
+                            ]    
+    // Stockage de la quantité totale d'animaux dans le filet
+    let total = 0;
+    // Je boucle sur le tableau cardsList index 1 pour additionner toutes les quantités
+    for(let i = 2; i < cardsList.length; i++){
+        total = total + cardsList[i][1];
+    }
+    // Donc ici, total = 20
 
 
     //! STEP 5 ==============================================================================================
@@ -36,21 +43,38 @@ export function cardInit() {
     //* Lorsque la carte BATEAU sera tirée, son action sera déclenchée
     function boatAction() {
 
-        // Je récupère la div suivante de même niveau (.boat)
-        let nextFocusedElement = focusedElement.nextElementSibling;
-        // Je utilise la div qui contient la classe "focused" 
-        // Elle a déjà été récupérée en variable globale
-        // Et supprime la classe "focused" de cette div
-        focusedElement.classList.remove("focused");
-        // Puis j'ajoute la classe "focused" à la div suivante 
-        nextFocusedElement.classList.add("focused");
-        // ET j'attribue la valeur de nextFocusedElement à focusedElement !
-        // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
-        // focusedElement contenant la classe "focused"
-        focusedElement = nextFocusedElement;
-        // Je n'oublie pas de changer la valeur du booléen permettant de bloquer le recul du bateau ou non
-        boatPosition0 = false;
-    };
+        // Récupérer la position boat--5
+        let lastPositionBoat = document.querySelector('.boat--5');
+    
+        // Si la position boat--5 est fausse
+        if(lastPositionBoat === false){
+
+            // Je récupère la div suivante de même niveau (.boat)
+            let nextFocusedElement = focusedElement.nextElementSibling;
+            // Je utilise la div qui contient la classe "focused" 
+            // Elle a déjà été récupérée en variable globale
+            // Et supprime la classe "focused" de cette div
+            focusedElement.classList.remove("focused");
+            // Puis j'ajoute la classe "focused" à la div suivante 
+            nextFocusedElement.classList.add("focused");
+            // ET j'attribue la valeur de nextFocusedElement à focusedElement !
+            // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
+            // focusedElement contenant la classe "focused"
+            focusedElement = nextFocusedElement;
+            // Je n'oublie pas de changer la valeur du booléen permettant de bloquer le recul du bateau ou non
+            boatPosition0 = false;
+        } else {
+
+
+            // si les quantités sont supérieures à 0 quand le bateau est en position boat--5
+            
+                // Alors la div du filet est en couleur
+            // 3 - Avec un setTimeout, afficher une div
+                // Contenant un message de défaite
+                // Et un bouton "Rejouer"
+        
+        }
+    }
 
     //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
     function oceanAction() {
@@ -63,7 +87,7 @@ export function cardInit() {
                 // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
                 // 4 DONE - Insérer dans cette div des divs de chaque animal restant
                 // 5 DONE - Rendre cliquable les div animales
-                // 6 DONE - ADE : au click :
+                // 6 DONE - AEL : au click :
                     // 1 DONE - Faire disparaître la div de choix d'animal à libérer
                     // 2 DONE - Lancer la fonction correspondante selon l'animal cliqué
                     // 3 DONE - Réactiver le clic sur le bouton pour tirer une carte
@@ -75,9 +99,6 @@ export function cardInit() {
         newCardBtn.classList.add('desactivated');
         
         //* 1 - Masquer la div no-popup
-        // Je récupère la div no-popup
-        let noPopup = document.getElementById('no-popup');
-        // Masque cette div
         noPopup.classList.add('inactive');
         
         //* 2 - Présenter une div à l'utilisateur
@@ -89,7 +110,7 @@ export function cardInit() {
         popupOcean.classList.add('popup-open');
         // Un titre annonce au joueur qu'il doit choisir un animal à libérer
         let popupOceanTitle = document.createElement('p');
-        popupOceanTitle.textContent = "Choose which animal you want to get free";
+        popupOceanTitle.textContent = "Choisis quel animal tu veux libérer";
         popupOcean.append(popupOceanTitle);
 
         //* 3 - Insérer dans la div popupOcean une div sous le titre
@@ -113,7 +134,7 @@ export function cardInit() {
                 popupInPopupOceanUnderTitle.append(popupAnimal);
                 // J'ajoute à cette div la classe popup-animal, et la classe "nom de l'animal"
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
-                popupAnimal.textContent = cardsList[i][0];
+                popupAnimal.textContent = cardsList[i][3];
 
                 //* 5 - Rendre cliquables les divs animales
                 popupAnimal.addEventListener('click', () => {
@@ -138,7 +159,6 @@ export function cardInit() {
             // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
             //? STEP 1 : Faire reculer OU NON le bateau selon sa position
             (function backBoat() {
-                console.log('%c' + "dans backBoat()", 'color: red; font-size: 1.5rem');
 
                 // On stocke dans une variable focusElement qui contient la classe "boat--0"
                 let focusedElementPosition0 = focusedElement.classList.contains('boat--0');
@@ -178,7 +198,9 @@ export function cardInit() {
                 // node.removeChild(child)
                 net.removeChild(octopusEl);
                 // Je supprime une quantité de l'objet octopus
-                cardsList[2][1] -=1;
+                cardsList[2][1] -= 1;
+                total -= 1;
+                return total;
             })();
         } else if(cardsList[2][1] === 0){ 
             // Création d'une alerte
@@ -198,7 +220,7 @@ export function cardInit() {
             // Je lui donne une classe
             alert.classList.add('popup-open');
             // J'ajoute dans cette div le texte de l'alerte
-            alert.textContent = "There is no more octopus to free";
+            alert.textContent = "Il n'y a plus de pieuvres à libérer";
             
             //* 3 - Insérer cette div
             gameSpace.append(alert);
@@ -235,6 +257,8 @@ export function cardInit() {
                 net.removeChild(elementsToRemove[0]);
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
+                total -= 1;
+                return total;
 
             } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
                 //* 0 - Désactiver le clic sur le bouton "tirer une carte"
@@ -253,7 +277,7 @@ export function cardInit() {
                 // Je lui donne une classe
                 alert.classList.add('popup-open');
                 // J'ajoute dans cette div le texte de l'alerte
-                alert.textContent = "There is no more " + cardsList[randomCard][0] + " to free";
+                alert.textContent = "Il n'y a plus de " + cardsList[randomCard][3] + " à libérer";
                 
                 //* 3 - Insérer cette div
                 gameSpace.append(alert);
@@ -271,8 +295,6 @@ export function cardInit() {
             }
         } 
     }
-
-
 
 
     //! STEP 4 ==============================================================================================
@@ -293,26 +315,55 @@ export function cardInit() {
     }
 
 
-
     //! STEP 3 ==============================================================================================
-    //* Déclaration de la fonction HANDLER
+    //*  Déclaration de la fonction TOTAL
+    function handleTotal(){
+        if(total > 0){
+            handleRandomCard();
+            console.log(total);
+        } else {
+            // Si la quantité est à 0, le joueur gagne
+            // Je cache le bouton pour tirer une carte
+            newCardBtn.classList.add('inactive');
+            // Je cache le plateau de jeu
+            noPopup.classList.add('inactive');
+            // Je crée une div
+            let winDiv = document.createElement('div');
+            // J'ajoute la div dans gameSpace
+            gameSpace.append(winDiv);
+            // J'ajoute du texte
+            winDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"replay\">Rejouer</p>";
+            // Je récupère l'élément dont la classe est "replay"
+            let replay = document.querySelector('.replay');
+            // AEL : au click
+            replay.addEventListener('click', () => {
+                // Je supprime la div winDiv
+                winDiv.remove();
+                // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
+                let startBtn = document.querySelector('startBtn');
+                startBtn.classList.remove('inactive');
+            });
+        } 
+    }
+    
+    //* Déclaration de la fonction RANDOM CARD
     function handleRandomCard() {
-            
-        randomCard              = Math.floor(Math.random() * (cardsList.length));
-        let resultCardDiv       = document.querySelector('#resultCard');
 
-        // J'incrémente le contenu de ma variable dans ma div
-        resultCardDiv.textContent = cardsList[randomCard][0];
-        // Et je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
-        // Juste histoire d'améliorer l'UX
-        setTimeout(actions(randomCard), 500);
+            randomCard              = Math.floor(Math.random() * (cardsList.length));
+            let resultCardDiv       = document.querySelector('#resultCard');
+
+            // J'incrémente le contenu de ma variable dans ma div
+            resultCardDiv.textContent = cardsList[randomCard][3];
+            // Et je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
+            // Juste histoire d'améliorer l'UX
+            setTimeout(actions(randomCard), 500);
     }
 
 
     //! STEP 2 ==============================================================================================
     //* Création des INTERACTIONS UTILISATEURS
+    // Au clic sur le bouton "tirer une carte", le handler Total() est déclenché
     newCardBtn.addEventListener('click', handleRandomCard);
-
 }
 
 
