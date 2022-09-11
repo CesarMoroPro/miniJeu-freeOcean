@@ -38,32 +38,40 @@ export function cardInit() {
 
 
     //! STEP 6 ==============================================================================================
-    function winAndStopGame() {
+    // Fonctionnalité déclenchée en cas de victoire du joueur
+    function stopGame() {
         
-        // Je cache le bouton pour tirer une carte
-        newCardBtn.classList.add('inactive');
-        // Je cache le plateau de jeu
-        noPopup.classList.add('inactive');
-        // Je crée une div
-        let winDiv = document.createElement('div');
-        // J'ajoute la div dans gameSpace
-        gameSpace.append(winDiv);
-        // J'ajoute du texte
-        winDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"replay\">Rejouer</p>";
-        // Je récupère l'élément dont la classe est "replay"
-        let replay = document.querySelector('.replay');
-        replay.classList.add('replay-btn')
-        // AEL : au click
-        replay.addEventListener('click', () => {
-            // Je supprime la div winDiv
-            winDiv.remove();
-            // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
-            let startBtn = document.querySelector('startBtn');
-            startBtn.classList.remove('inactive');
-        });
+            // Je cache le bouton pour tirer une carte
+            newCardBtn.classList.add('inactive');
+            // Je cache le plateau de jeu
+            noPopup.classList.add('inactive');
+            // Je crée une div
+            let endDiv = document.createElement('div');
+            // J'ajoute la div dans gameSpace
+            gameSpace.append(endDiv);
+
+            // Si le filet est vide
+            if(total === 0){
+                // J'ajoute le texte de victoire + un bouton REJOUER
+                endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"btn replay\">Rejouer</p>";
+            }
+            // Sinon, si le filet est à 1 ou plus quand le bateau l'atteint 
+            else if(total > 0){
+                // J'ajoute le texte de défaite + un bouton REJOUER
+                endDiv.innerHTML="<p class=\"failed\">Le bateau est arrivé avant que tous les animaux ne soient libérés... Malheureusement, c'est perdu.</p><p class=\"btn replay\">Rejouer</p>";
+            }
+
+            // Je récupère l'élément dont la classe est "replay"
+            let replay = document.querySelector('.replay');
+            // AEL : au click
+            replay.addEventListener('click', () => {
+                // Je supprime la div endDiv
+                endDiv.remove();
+                // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
+                let startBtn = document.querySelector('startBtn');
+                startBtn.classList.remove('inactive');
+            });
     }
-    
-            
 
 
     //! STEP 5 ==============================================================================================
@@ -72,37 +80,31 @@ export function cardInit() {
     //* Lorsque la carte BATEAU sera tirée, son action sera déclenchée
     function boatAction() {
 
-        // Récupérer la position boat--5
-        let lastPositionBoat = document.querySelector('.boat--5');
-    
-        // Si la position boat--5 est fausse
-        if(lastPositionBoat === false){
+        //* 1 - Faire avancer le bateau puisque le jeu commence avec le bateau en position 0
+        // Je récupère la div suivante de même niveau (.boat)
+        let nextFocusedElement = focusedElement.nextElementSibling;
+        // J'utilise la div qui contient la classe "focused" 
+        // Elle a déjà été récupérée en variable globale
+        // Et supprime la classe "focused" de cette div
+        focusedElement.classList.remove("focused");
+        // j'ajoute la classe "focused" à la div suivante
+        nextFocusedElement.classList.add("focused");
+        // ET j'attribue la valeur de nextFocusedElement à focusedElement !
+        // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
+        // focusedElement contenant la classe "focused"
+        focusedElement = nextFocusedElement;
+        // Je n'oublie pas de changer la valeur du booléen permettant de bloquer le recul du bateau ou non
+        boatPosition0 = false;                
+    }
 
-            // Je récupère la div suivante de même niveau (.boat)
-            let nextFocusedElement = focusedElement.nextElementSibling;
-            // Je utilise la div qui contient la classe "focused" 
-            // Elle a déjà été récupérée en variable globale
-            // Et supprime la classe "focused" de cette div
-            focusedElement.classList.remove("focused");
-            // Puis j'ajoute la classe "focused" à la div suivante 
-            nextFocusedElement.classList.add("focused");
-            // ET j'attribue la valeur de nextFocusedElement à focusedElement !
-            // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
-            // focusedElement contenant la classe "focused"
-            focusedElement = nextFocusedElement;
-            // Je n'oublie pas de changer la valeur du booléen permettant de bloquer le recul du bateau ou non
-            boatPosition0 = false;
-        } else {
+    function winBoatAction() {
 
-
-            // si les quantités sont supérieures à 0 quand le bateau est en position boat--5
-            
-                // Alors la div du filet est en couleur
-            // 3 - Avec un setTimeout, afficher une div
-                // Contenant un message de défaite
-                // Et un bouton "Rejouer"
-        
-        }
+        // Je retire la classe "focused" sur le "focusedElement"
+        focusedElement.classList.remove('focused');
+        // J'ajoute la classe "blodd-net" sur le filet "net"
+        net.classList.add('blood-net');
+        // Je déclenche la fonction de défaite après un court délai
+        setTimeout(stopGame, 1500);
     }
 
     //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
@@ -230,7 +232,7 @@ export function cardInit() {
                 cardsList[2][1] -= 1;
                 total -= 1;
                 if(total === 0){
-                    winAndStopGame();
+                    stopGame();
                 }
             })();
         } else if(cardsList[2][1] === 0){ 
@@ -290,7 +292,7 @@ export function cardInit() {
                 cardsList[param][1] -= 1;
                 total -= 1;
                 if(total === 0){
-                    winAndStopGame();
+                    stopGame();
                 }
 
             } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
@@ -348,12 +350,7 @@ export function cardInit() {
     }
 
 
-    //! STEP 3 ==============================================================================================
-    //*  Déclaration de la fonction TOTAL
-    function handleTotal(){
-            handleRandomCard();
-    }
-    
+    //! STEP 3 ==============================================================================================    
     //* Déclaration de la fonction RANDOM CARD
     function handleRandomCard() {
 
@@ -362,9 +359,19 @@ export function cardInit() {
 
             // J'incrémente le contenu de ma variable dans ma div
             resultCardDiv.textContent = cardsList[randomCard][3];
-            // Et je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
-            // Juste histoire d'améliorer l'UX
-            setTimeout(actions(randomCard), 500);
+
+            // Si randomCard vaut false (donc le bateau est tiré)
+            // ET SI "focusedElement" contient la classe "boat--5"
+            // ET SI la quantité dans le filet "total" est supérieur à 0
+            if(focusedElement.classList.contains('boat--5') && total > 0 && randomCard == false){
+                // Alors je déclenche l'action précise du bateau qui gagne
+                setTimeout(winBoatAction, 500);
+            } else {
+                // Sinon, je déclenche les actions normales
+                // Je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
+                // Juste histoire d'améliorer l'UX
+                setTimeout(actions(randomCard), 500);
+            }
     }
 
 

@@ -5,3 +5,30 @@
 .active {
     visibility: visible;
 }
+
+#starting {
+    
+    .btn {
+        background-color: rgba(128, 0, 128, 0.3);
+        width: 80px;
+        padding: $gutter-small-extra;
+        border-radius: 35px;
+        border: rgb(128, 0, 128) 1px solid;
+    }
+
+    .btn:hover {
+        background-color: rgb(128, 0, 128);
+        border: solid 1px rgb(63, 0, 63);
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn.desactivated {
+        background-color: #a3a3a3;
+    }
+
+    .btn.desactivated:hover {
+        background-color: #a3a3a3;
+        color: black;
+    }
+}
