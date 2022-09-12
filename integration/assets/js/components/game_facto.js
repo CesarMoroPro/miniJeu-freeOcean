@@ -9,10 +9,14 @@ export function cardInit() {
     let focusedElement      = document.querySelector('.focused');
     // Filet
     let net                 = document.querySelector('#net');
+    // Récupération de la div "global"
+    let global              = document.querySelector('#global');
     // Div game-space
-    let gameSpace = document.getElementById('game-space');
+    let gameSpace           = document.getElementById('game-space');
     // Je récupère la div no-popup
-    let noPopup = document.getElementById('no-popup');
+    let noPopup             = document.getElementById('no-popup');
+    // Je crée une div pour le message de fin de partie
+    let endDiv              = document.createElement('div');
     // Random number représentant un index du tableau cardsList
     let randomCard;
     // Bouton Draw a card
@@ -37,40 +41,47 @@ export function cardInit() {
     // Donc ici, total = 20
 
 
+
+
+    //! STEP 7 ==============================================================================================
+    // Fonction déclenchée après avoir cliqué sur le bouton "Rejouer"
+    function replayFunction() {
+        // Au click sur le bouton replay,
+        // Je supprime la div endDiv
+        endDiv.remove();
+        // Je recharge le contenu de la page
+        location.reload();
+        // Je réactive le bouton "tirer une carte"
+        newCardBtn.classList.replace('desactivated', 'active');
+    }
+
+
     //! STEP 6 ==============================================================================================
     // Fonctionnalité déclenchée en cas de victoire du joueur
     function stopGame() {
-        
-            // Je cache le bouton pour tirer une carte
-            newCardBtn.classList.add('inactive');
-            // Je cache le plateau de jeu
-            noPopup.classList.add('inactive');
-            // Je crée une div
-            let endDiv = document.createElement('div');
-            // J'ajoute la div dans gameSpace
-            gameSpace.append(endDiv);
 
-            // Si le filet est vide
-            if(total === 0){
-                // J'ajoute le texte de victoire + un bouton REJOUER
-                endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"btn replay\">Rejouer</p>";
-            }
-            // Sinon, si le filet est à 1 ou plus quand le bateau l'atteint 
-            else if(total > 0){
-                // J'ajoute le texte de défaite + un bouton REJOUER
-                endDiv.innerHTML="<p class=\"failed\">Le bateau est arrivé avant que tous les animaux ne soient libérés... Malheureusement, c'est perdu.</p><p class=\"btn replay\">Rejouer</p>";
-            }
+        // Je désasctive le bouton pour tirer une carte mais je le laisse visible
+        newCardBtn.classList.replace('active', 'desactivated');
+        // Je cache le plateau de jeu
+        noPopup.classList.add('inactive');
+        // J'ajoute la div endDiv dans gameSpace
+        gameSpace.append(endDiv);
 
-            // Je récupère l'élément dont la classe est "replay"
-            let replay = document.querySelector('.replay');
-            // AEL : au click
-            replay.addEventListener('click', () => {
-                // Je supprime la div endDiv
-                endDiv.remove();
-                // J'affiche le bouton "Jouer Maintenant" que je dois au préalable récupérer
-                let startBtn = document.querySelector('startBtn');
-                startBtn.classList.remove('inactive');
-            });
+        // Si le filet est vide
+        if(total === 0){
+            // J'ajoute le texte de victoire + un bouton REJOUER
+            endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"btn replay\">Rejouer</p>";
+        }
+        // Sinon, si le filet est à 1 ou plus quand le bateau l'atteint 
+        else if(total > 0){
+            // J'ajoute le texte de défaite + un bouton REJOUER
+            endDiv.innerHTML="<p class=\"failed\">Le bateau est arrivé avant que tous les animaux ne soient libérés... Malheureusement, c'est perdu.</p><p class=\"btn replay\">Rejouer</p>";
+        }
+
+        // Je récupère l'élément dont la classe est "replay"
+        let replay = document.querySelector('.replay');
+        // AEL : au click, je lance la fonction replay();
+        replay.addEventListener('click', replayFunction);
     }
 
 
@@ -99,12 +110,14 @@ export function cardInit() {
 
     function winBoatAction() {
 
+        // Je désactive le bouton pour tirer une nouvelle carte
+        newCardBtn.classList.add('inactive');
         // Je retire la classe "focused" sur le "focusedElement"
         focusedElement.classList.remove('focused');
         // J'ajoute la classe "blodd-net" sur le filet "net"
         net.classList.add('blood-net');
         // Je déclenche la fonction de défaite après un court délai
-        setTimeout(stopGame, 1500);
+        setTimeout(stopGame, 750);
     }
 
     //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée

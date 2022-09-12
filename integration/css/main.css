@@ -308,25 +308,32 @@ body h2 {
   visibility: visible;
 }
 
-#starting .btn {
+.btn {
   background-color: rgba(128, 0, 128, 0.3);
   width: 80px;
   padding: 0.5em;
   border-radius: 35px;
   border: rgb(128, 0, 128) 1px solid;
 }
-#starting .btn:hover {
+
+.btn:hover {
   background-color: rgb(128, 0, 128);
   border: solid 1px rgb(63, 0, 63);
   color: white;
   cursor: pointer;
 }
-#starting .btn.desactivated {
+
+.btn.desactivated {
   background-color: #a3a3a3;
 }
-#starting .btn.desactivated:hover {
+
+.btn.desactivated:hover {
   background-color: #a3a3a3;
   color: black;
+}
+
+.replay {
+  cursor: pointer;
 }
 
 .boat {
