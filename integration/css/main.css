@@ -301,11 +301,11 @@ body h2 {
 }
 
 .inactive {
-  visibility: hidden;
+  display: none;
 }
 
 .active {
-  visibility: visible;
+  display: block;
 }
 
 .btn {
@@ -381,8 +381,18 @@ body h2 {
   background-color: #f0f;
 }
 
-.endDiv {
-  color: blue;
+.end-div {
+  width: 440px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.end-div .victory, .end-div .failed {
+  color: orange;
+  margin: 1em;
+  line-height: 1.4em;
 }
 
 .no-more-animals {

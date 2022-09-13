@@ -59,6 +59,8 @@ export function cardInit() {
         noPopup.classList.add('inactive');
         // J'ajoute la div endDiv dans gameSpace
         gameSpace.append(endDiv);
+        // Et je lui ajoute la classe "end-div"
+        endDiv.classList.add('end-div');
 
         // Si le filet est vide
         if(total === 0){

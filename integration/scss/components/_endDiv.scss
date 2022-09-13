@@ -1,3 +1,15 @@
-.endDiv {
-    color: blue;
+.end-div {
+    width: 440px;
+    height: 240px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .victory, .failed {
+        color: orange;
+        margin: $gutter-small;
+        line-height: 1.4em;
+    }
 }
