@@ -1,5 +1,5 @@
 .boat {
-    border: blue solid 1px;
+    border: blue dashed 1px;
 
     position: absolute;
     width: 60px;
@@ -8,6 +8,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.boat-mini {
+    width: 60px;
+    height: 60px;
 }
 
 .boat--0 {
@@ -42,6 +47,5 @@
 
 
 .focused {
-    border: dashed 2px blue;
-    background-color: #f0f;
+    border: solid 2px brown;
 }
