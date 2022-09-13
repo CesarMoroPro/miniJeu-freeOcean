@@ -128,6 +128,10 @@ body h2 {
   justify-content: center;
   align-items: center;
 }
+#starting #click-player #result #resultCard .result-card-poufff {
+  width: 100px;
+  height: 100px;
+}
 #starting #rules {
   display: flex;
   flex-direction: column;
@@ -433,6 +437,10 @@ body h2 {
 }
 .popup-open .popup-animal:hover {
   cursor: pointer;
+}
+.popup-open .popup-animal-mini {
+  width: 80px;
+  height: 80px;
 }
 
 /*# sourceMappingURL=main.css.map */

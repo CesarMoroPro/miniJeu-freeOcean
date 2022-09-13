@@ -13,6 +13,8 @@ export function cardInit() {
     let gameSpace           = document.getElementById('game-space');
     // Je récupère la div no-popup
     let noPopup             = document.getElementById('no-popup');
+    // Je récupère la balise img contenant la classe ".boat-mini"
+    let boatMini            = document.querySelector('.boat-mini');
     // Je crée une div pour le message de fin de partie
     let endDiv              = document.createElement('div');
     // Random number représentant un index du tableau cardsList
@@ -22,13 +24,13 @@ export function cardInit() {
     // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source, leur nom en français, et le chemin vers leur image (depuis index.html) (chemin non dynamique) 
     let cardsList           = 
                             [
-                                ['boat',    1, 'EMPTY',     'bateau',   '<img src="./assets/img/bateau.jpeg">'],
-                                ['ocean',   1, 'EMPTY',     'océan',    '<img src="./assets/img/ocean.png">'],
-                                ['octopus', 2, 'octopus',   'pieuvre',  '<img src="./assets/img/pieuvre.png">'], // ['nom', quantité, 'classe html', 'nom en français', 'chemin vers image']
-                                ['turtle',  4, 'turtle',    'tortue',   '<img src="./assets/img/tortue.jpg">'],
-                                ['fish',    8, 'fish',      'poisson',  '<img src="./assets/img/poisson.jpg">'],
-                                ['shark',   3, 'shark',     'requin',   '<img src="./assets/img/requin.jpg">'],
-                                ['dolphin', 3, 'dolphin',   'dauphin',  '<img src="./assets/img/dauphin.png">']
+                                ['boat',    1, 'EMPTY',     'bateau',   'img src="./assets/img/bateau.jpeg"'],
+                                ['ocean',   1, 'EMPTY',     'océan',    'img src="./assets/img/ocean.png"'],
+                                ['octopus', 2, 'octopus',   'pieuvre',  'img src="./assets/img/pieuvre.png"'], // ['nom', quantité, 'classe html', 'nom en français', 'chemin vers image']
+                                ['turtle',  4, 'turtle',    'tortue',   'img src="./assets/img/tortue.jpg"'],
+                                ['fish',    8, 'fish',      'poisson',  'img src="./assets/img/poisson.jpg"'],
+                                ['shark',   3, 'shark',     'requin',   'img src="./assets/img/requin.jpg"'],
+                                ['dolphin', 3, 'dolphin',   'dauphin',  'img src="./assets/img/dauphin.png"']
                             ]
 
     // Stockage de la quantité totale d'animaux dans le filet
@@ -89,18 +91,16 @@ export function cardInit() {
         //* 1 - Faire avancer le bateau puisque le jeu commence avec le bateau en position 0
         // Je récupère la div suivante de même niveau (.boat)
         let nextFocusedElement = focusedElement.nextElementSibling;
-        // Je récupère la div contenant la classe ".boat-mini"
-        let boatMini            = document.querySelector('.boat-mini');
         // J'utilise la div qui contient la classe "focused" 
         // Elle a déjà été récupérée en variable globale
         // Je supprime la classe "focused" de cette div
         focusedElement.classList.remove("focused");
-        // Je supprime la div boatMini pour supprimer la balise img
+        // Je supprime l'élément boatMini pour supprimer la balise img
         boatMini.remove();
 
         // Puis j'ajoute la classe "focused" à l'élément suivant
         nextFocusedElement.classList.add("focused");
-        // Ainsi que le code source du bateau
+        // Ainsi que le code source de la balise img bateau
         nextFocusedElement.innerHTML="<img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\">"
 
         // ET j'attribue la valeur de nextFocusedElement à focusedElement !
@@ -170,7 +170,7 @@ export function cardInit() {
                 popupInPopupOceanUnderTitle.append(popupAnimal);
                 // J'ajoute à cette div la classe popup-animal, et la classe "nom de l'animal"
                 popupAnimal.classList.add('popup-animal', cardsList[i][2]);
-                popupAnimal.textContent = cardsList[i][3];
+                popupAnimal.innerHTML = "<" + cardsList[i][4] + "class=\"popup-animal-mini\">";
 
                 //* 5 - Rendre cliquables les divs animales
                 popupAnimal.addEventListener('click', () => {
@@ -211,8 +211,14 @@ export function cardInit() {
                     let previousFocusedElement = focusedElement.previousElementSibling;
                     // Je supprime la classe "focused" de l'élément courant
                     focusedElement.classList.remove("focused");
+                    // Je supprime la balise img bateau
+                    boatMini.remove();
+
                     // J'ajoute la classe "focused" à son élément précédent
                     previousFocusedElement.classList.add("focused");
+                    // Ainsi que le code source de la balise img bateau
+                    previousFocusedElement.innerHTML="<img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\">"
+                    
                     // J'attribue la valeur de l'élément précédent à la variable focusedElement
                     // pour qu'elle soit encore utilisable
                     focusedElement = previousFocusedElement;
@@ -365,7 +371,7 @@ export function cardInit() {
             // J'incrémente le contenu de ma variable dans ma div
             // Ici, résultat écrit : resultCardDiv.textContent = cardsList[randomCard][3];
             // Là, résultat avec une image
-            resultCardDiv.innerHTML=cardsList[randomCard][4];
+            resultCardDiv.innerHTML="<" + cardsList[randomCard][4] + "class=\"result-card-poufff\">";
 
             // Si randomCard vaut false (donc le bateau est tiré)
             // ET SI "focusedElement" contient la classe "boat--5"
