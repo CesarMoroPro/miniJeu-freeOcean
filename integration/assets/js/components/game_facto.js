@@ -19,16 +19,16 @@ export function cardInit() {
     let randomCard;
     // Bouton Draw a card
     let newCardBtn          = document.querySelector('.cardBtn');
-    // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source et leur nom en français
+    // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source, leur nom en français, et le chemin vers leur image (depuis index.html) (chemin non dynamique) 
     let cardsList           = 
                             [
-                                ['boat', 1, '', 'bateau'],
-                                ['ocean', 1, '', 'océan'],
-                                ['octopus', 2, 'octopus', 'pieuvre'], // ['nom, quantité, classe html, nom en français]
-                                ['turtle', 4, 'turtle', 'tortue'],
-                                ['fish', 8, 'fish', 'poisson'],
-                                ['shark', 3, 'shark', 'requin'],
-                                ['dolphin', 3, 'dolphin', 'dauphin']
+                                ['boat',    1, 'EMPTY',     'bateau',   '<img src="./assets/img/bateau.jpeg">'],
+                                ['ocean',   1, 'EMPTY',     'océan',    '<img src="./assets/img/ocean.png">'],
+                                ['octopus', 2, 'octopus',   'pieuvre',  '<img src="./assets/img/pieuvre.png">'], // ['nom', quantité, 'classe html', 'nom en français', 'chemin vers image']
+                                ['turtle',  4, 'turtle',    'tortue',   '<img src="./assets/img/tortue.jpg">'],
+                                ['fish',    8, 'fish',      'poisson',  '<img src="./assets/img/poisson.jpg">'],
+                                ['shark',   3, 'shark',     'requin',   '<img src="./assets/img/requin.jpg">'],
+                                ['dolphin', 3, 'dolphin',   'dauphin',  '<img src="./assets/img/dauphin.png">']
                             ]
 
     // Stockage de la quantité totale d'animaux dans le filet
@@ -89,12 +89,20 @@ export function cardInit() {
         //* 1 - Faire avancer le bateau puisque le jeu commence avec le bateau en position 0
         // Je récupère la div suivante de même niveau (.boat)
         let nextFocusedElement = focusedElement.nextElementSibling;
+        // Je récupère la div contenant la classe ".boat-mini"
+        let boatMini            = document.querySelector('.boat-mini');
         // J'utilise la div qui contient la classe "focused" 
         // Elle a déjà été récupérée en variable globale
-        // Et supprime la classe "focused" de cette div
+        // Je supprime la classe "focused" de cette div
         focusedElement.classList.remove("focused");
-        // j'ajoute la classe "focused" à la div suivante
+        // Je supprime la div boatMini pour supprimer la balise img
+        boatMini.remove();
+
+        // Puis j'ajoute la classe "focused" à l'élément suivant
         nextFocusedElement.classList.add("focused");
+        // Ainsi que le code source du bateau
+        nextFocusedElement.innerHTML="<img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\">"
+
         // ET j'attribue la valeur de nextFocusedElement à focusedElement !
         // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
         // focusedElement contenant la classe "focused"
@@ -355,7 +363,9 @@ export function cardInit() {
             let resultCardDiv       = document.querySelector('#resultCard');
 
             // J'incrémente le contenu de ma variable dans ma div
-            resultCardDiv.textContent = cardsList[randomCard][3];
+            // Ici, résultat écrit : resultCardDiv.textContent = cardsList[randomCard][3];
+            // Là, résultat avec une image
+            resultCardDiv.innerHTML=cardsList[randomCard][4];
 
             // Si randomCard vaut false (donc le bateau est tiré)
             // ET SI "focusedElement" contient la classe "boat--5"
