@@ -9,8 +9,6 @@ export function cardInit() {
     let focusedElement      = document.querySelector('.focused');
     // Filet
     let net                 = document.querySelector('#net');
-    // Récupération de la div "global"
-    let global              = document.querySelector('#global');
     // Div game-space
     let gameSpace           = document.getElementById('game-space');
     // Je récupère la div no-popup
@@ -31,28 +29,23 @@ export function cardInit() {
                                 ['fish', 8, 'fish', 'poisson'],
                                 ['shark', 3, 'shark', 'requin'],
                                 ['dolphin', 3, 'dolphin', 'dauphin']
-                            ]    
+                            ]
+
     // Stockage de la quantité totale d'animaux dans le filet
-    let total = 0;
+    let total               = 0;
     // Je boucle sur le tableau cardsList index 1 pour additionner toutes les quantités
     for(let i = 2; i < cardsList.length; i++){
-        total = total + cardsList[i][1];
+        total                       = total + cardsList[i][1];
+        // Total = 20
     }
     // Donc ici, total = 20
-
-
-
 
     //! STEP 7 ==============================================================================================
     // Fonction déclenchée après avoir cliqué sur le bouton "Rejouer"
     function replayFunction() {
         // Au click sur le bouton replay,
-        // Je supprime la div endDiv
-        endDiv.remove();
         // Je recharge le contenu de la page
         location.reload();
-        // Je réactive le bouton "tirer une carte"
-        newCardBtn.classList.replace('desactivated', 'active');
     }
 
 
@@ -110,8 +103,6 @@ export function cardInit() {
 
     function winBoatAction() {
 
-        // Je désactive le bouton pour tirer une nouvelle carte
-        newCardBtn.classList.add('inactive');
         // Je retire la classe "focused" sur le "focusedElement"
         focusedElement.classList.remove('focused');
         // J'ajoute la classe "blodd-net" sur le filet "net"
@@ -122,20 +113,11 @@ export function cardInit() {
 
     //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
     function oceanAction() {
+        //* L'action Océan consiste à laisser le choix à l'utilisateur : quel animal restant encore dans le filet il veut libérer
+        //TODO Si le filet comporte plusieurs sortes d'animaux, alors déclenche la fonction animalAction(i) ou octopusAction(), selon le clic utilisateur
+        //TODO Si le filet ne comporte plus qu'une sorte d'animal, alors son action est déclenchée directement sans ouvrir de popup choix utilisateur
 
-        //* L'action Océan consiste à laisser le choix à l'utilisateur : quel animal restant il veut libérer.
-            // Il faut donc :
-                // 0 DONE - Désactiver le clic sur ma bouton pour tirer une carte
-                // 1 DONE - Masquer la div no-popup
-                // 2 DONE - Présenter une div à l'utilisateur
-                // 3 DONE - Connaître quels animaux sont encore dans le filet (donc nb > 0)
-                // 4 DONE - Insérer dans cette div des divs de chaque animal restant
-                // 5 DONE - Rendre cliquable les div animales
-                // 6 DONE - AEL : au click :
-                    // 1 DONE - Faire disparaître la div de choix d'animal à libérer
-                    // 2 DONE - Lancer la fonction correspondante selon l'animal cliqué
-                    // 3 DONE - Réactiver le clic sur le bouton pour tirer une carte
-
+        // Alors le code popupOcean pour le choix de l'utilisateur peut être lancé
         //* 0 - Désactiver le clic sur le bouton "tirer une carte"
         // Supprimer l'écouteur d'événement
         newCardBtn.removeEventListener('click', handleRandomCard);
@@ -191,7 +173,7 @@ export function cardInit() {
                     } else {
                         animalAction(i);
                     }
-                })
+                });
             }
         }
     }
@@ -377,7 +359,11 @@ export function cardInit() {
             // ET SI "focusedElement" contient la classe "boat--5"
             // ET SI la quantité dans le filet "total" est supérieur à 0
             if(focusedElement.classList.contains('boat--5') && total > 0 && randomCard == false){
-                // Alors je déclenche l'action précise du bateau qui gagne
+                // Je change la classe sur le bouton "tirer une carte" pour le griser
+                newCardBtn.classList.add('desactivated');
+                // Je désactive le clic sur ce même bouton
+                newCardBtn.removeEventListener('click', handleRandomCard);
+                // Puis je déclenche l'action précise du bateau qui gagne
                 setTimeout(winBoatAction, 500);
             } else {
                 // Sinon, je déclenche les actions normales
