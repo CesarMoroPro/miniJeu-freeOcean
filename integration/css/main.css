@@ -176,128 +176,131 @@ body h2 {
 }
 .animal {
   position: absolute;
-  width: 15px;
+}
+
+.fish-mini {
+  width: 18px;
   height: 15px;
 }
 
-.fish {
-  border: blue solid 1px;
-}
-
 .fish--0 {
-  top: 120px;
-  left: 20px;
+  top: 110px;
+  left: 5px;
 }
 
 .fish--1 {
-  top: 60px;
+  top: 40px;
   left: 80px;
 }
 
 .fish--2 {
-  top: 180px;
-  left: 100px;
+  top: 165px;
+  left: 140px;
 }
 
 .fish--3 {
   top: 30px;
-  left: 155px;
+  left: 148px;
 }
 
 .fish--4 {
-  top: 130px;
-  left: 100px;
+  top: 125px;
+  left: 75px;
 }
 
 .fish--5 {
-  top: 155px;
-  left: 150px;
+  top: 110px;
+  left: 140px;
 }
 
 .fish--6 {
-  top: 15px;
-  left: 60px;
+  top: 10px;
+  left: 57px;
 }
 
 .fish--7 {
-  top: 70px;
-  left: 175px;
+  top: 73px;
+  left: 177px;
 }
 
-.octopus {
-  border: red solid 1px;
+.octopus-mini {
+  width: 50px;
+  height: 50px;
 }
 
 .octopus--0 {
-  top: 30px;
-  left: 30px;
+  top: 25px;
+  left: 20px;
 }
 
 .octopus--1 {
-  top: 150px;
-  left: 90px;
+  top: 85px;
+  left: 85px;
 }
 
-.shark {
-  border: green solid 1px;
+.shark-mini {
+  width: 45px;
+  height: 35px;
 }
 
 .shark--0 {
-  top: 135px;
+  top: 130px;
   left: 130px;
 }
 
 .shark--1 {
-  top: 10px;
-  left: 110px;
+  top: 8px;
+  left: 95px;
 }
 
 .shark--2 {
-  top: 65px;
-  left: 10px;
+  top: 75px;
+  left: 5px;
 }
 
-.dolphin {
-  border: purple solid 1px;
+.dolphin-mini {
+  width: 45px;
+  height: 45px;
 }
 
 .dolphin--0 {
-  top: 95px;
-  left: 65px;
+  top: 107px;
+  left: 30px;
 }
 
 .dolphin--1 {
-  top: 95px;
-  left: 150px;
+  top: 55px;
+  left: 130px;
 }
 
 .dolphin--2 {
-  top: 155px;
-  left: 35px;
+  top: 145px;
+  left: 80px;
 }
 
-.turtle {
-  border: orange solid 1px;
+.turtle-mini {
+  width: 35px;
+  height: 35px;
 }
 
 .turtle--0 {
-  top: 85px;
-  left: 35px;
+  top: 70px;
+  left: 55px;
 }
 
 .turtle--1 {
   top: 40px;
-  left: 125px;
-}
-
-.turtle--2 {
-  top: 90px;
   left: 100px;
 }
 
+.turtle--2 {
+  top: 95px;
+  left: 160px;
+}
+
 .turtle--3 {
-  top: 130px;
-  left: 60px;
+  top: 145px;
+  left: 40px;
 }
 
 .inactive {
