@@ -72,7 +72,6 @@
 //* Code for the DIV GAME-SPACE >>> Div Net
 //* Code for the Boat and Animals are in specific files in Components Dir 
 #game-space {
-    border: green solid 2px;
 
     display: flex;
     flex-direction: row;
@@ -93,7 +92,7 @@
     }
 
     .blood-net {
-        background-color: #F75455;
+        background-color: rgba(128, 9, 9, 0.80);
     }
 }
 

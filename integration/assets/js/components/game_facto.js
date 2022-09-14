@@ -13,8 +13,6 @@ export function cardInit() {
     let gameSpace           = document.getElementById('game-space');
     // Je récupère la div no-popup
     let noPopup             = document.getElementById('no-popup');
-    // Je récupère la balise img contenant la classe ".boat-mini"
-    let boatMini            = document.querySelector('.boat-mini');
     // Je crée une div pour le message de fin de partie
     let endDiv              = document.createElement('div');
     // Random number représentant un index du tableau cardsList
@@ -55,8 +53,10 @@ export function cardInit() {
     // Fonctionnalité déclenchée en cas de victoire du joueur
     function stopGame() {
 
-        // Je désasctive le bouton pour tirer une carte mais je le laisse visible
-        newCardBtn.classList.replace('active', 'desactivated');
+        // Je désactive l'écouteur d'événements sur le bouton tirer une carte
+        newCardBtn.removeEventListener('click', handleRandomCard);
+        // Je grise le bouton pour tirer une carte mais je le laisse visible
+        newCardBtn.classList.add('desactivated');
         // Je cache le plateau de jeu
         noPopup.classList.add('inactive');
         // J'ajoute la div endDiv dans gameSpace
@@ -67,18 +67,18 @@ export function cardInit() {
         // Si le filet est vide
         if(total === 0){
             // J'ajoute le texte de victoire + un bouton REJOUER
-            endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"btn replay\">Rejouer</p>";
+            endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"refresh\">Actualise la page pour rejouer</p><!--<p class=\"btn replay\">Rejouer</p>-->";
         }
         // Sinon, si le filet est à 1 ou plus quand le bateau l'atteint 
         else if(total > 0){
             // J'ajoute le texte de défaite + un bouton REJOUER
-            endDiv.innerHTML="<p class=\"failed\">Le bateau est arrivé avant que tous les animaux ne soient libérés... Malheureusement, c'est perdu.</p><p class=\"btn replay\">Rejouer</p>";
+            endDiv.innerHTML="<p class=\"failed\">Le bateau est arrivé avant que tous les animaux ne soient libérés... Malheureusement, c'est perdu.</p><p class=\"refresh\">Actualise la page pour rejouer</p><!--<p class=\"btn replay\">Rejouer</p>-->";
         }
 
-        // Je récupère l'élément dont la classe est "replay"
-        let replay = document.querySelector('.replay');
-        // AEL : au click, je lance la fonction replay();
-        replay.addEventListener('click', replayFunction);
+        // // Je récupère l'élément dont la classe est "replay"
+        // let replay = document.querySelector('.replay');
+        // // AEL : au click, je lance la fonction replay();
+        // replay.addEventListener('click', replayFunction);
     }
 
 
@@ -89,19 +89,23 @@ export function cardInit() {
     function boatAction() {
 
         //* 1 - Faire avancer le bateau puisque le jeu commence avec le bateau en position 0
-        // Je récupère la div suivante de même niveau (.boat)
+        // Je récupère la div contenant la balise img du bateau
+        // Récupérer de manière globale fait buguer la suppression, donc cette ligne est doublée, ici et dans la fonction backBoat() de octopusAction()
+        let boatMiniDiv        = document.querySelector('.boat-mini-div');
+        // Je supprime la div boatMiniDiv pour supprimer la balise img
+        boatMiniDiv.remove();
+        // Puis je récupère la div suivante de même niveau que "focused" (.boat)
         let nextFocusedElement = focusedElement.nextElementSibling;
         // J'utilise la div qui contient la classe "focused" 
         // Elle a déjà été récupérée en variable globale
+
         // Je supprime la classe "focused" de cette div
         focusedElement.classList.remove("focused");
-        // Je supprime l'élément boatMini pour supprimer la balise img
-        boatMini.remove();
 
+        // J'ajoute à l'élément suivant le code source de la balise img bateau + sa classe "boat-mini"
+        nextFocusedElement.innerHTML="<div class=\"boat-mini-div\"><img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\"></div>";
         // Puis j'ajoute la classe "focused" à l'élément suivant
         nextFocusedElement.classList.add("focused");
-        // Ainsi que le code source de la balise img bateau
-        nextFocusedElement.innerHTML="<img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\">"
 
         // ET j'attribue la valeur de nextFocusedElement à focusedElement !
         // sinon le code ne fonctionnera plus puisqu'il n'y aura plus d'élément
@@ -118,7 +122,7 @@ export function cardInit() {
         // J'ajoute la classe "blodd-net" sur le filet "net"
         net.classList.add('blood-net');
         // Je déclenche la fonction de défaite après un court délai
-        setTimeout(stopGame, 750);
+        setTimeout(stopGame, 1000);
     }
 
     //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
@@ -211,14 +215,17 @@ export function cardInit() {
                     let previousFocusedElement = focusedElement.previousElementSibling;
                     // Je supprime la classe "focused" de l'élément courant
                     focusedElement.classList.remove("focused");
+                    // Je récupère la div contenant la balise img du bateau
+                    // Récupérer de manière globale fait buguer la suppression, donc cette ligne est doublée, ici et dans la fonction boatAction()
+                    let boatMiniDiv        = document.querySelector('.boat-mini-div');
                     // Je supprime la balise img bateau
-                    boatMini.remove();
+                    boatMiniDiv.remove();
 
                     // J'ajoute la classe "focused" à son élément précédent
                     previousFocusedElement.classList.add("focused");
                     // Ainsi que le code source de la balise img bateau
-                    previousFocusedElement.innerHTML="<img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\">"
-                    
+                    previousFocusedElement.innerHTML="<div class=\"boat-mini-div\"><img src=\"./assets/img/bateau.jpeg\" class=\"boat-mini\"></div>";
+
                     // J'attribue la valeur de l'élément précédent à la variable focusedElement
                     // pour qu'elle soit encore utilisable
                     focusedElement = previousFocusedElement;
@@ -377,17 +384,18 @@ export function cardInit() {
             // ET SI "focusedElement" contient la classe "boat--5"
             // ET SI la quantité dans le filet "total" est supérieur à 0
             if(focusedElement.classList.contains('boat--5') && total > 0 && randomCard == false){
-                // Je change la classe sur le bouton "tirer une carte" pour le griser
-                newCardBtn.classList.add('desactivated');
                 // Je désactive le clic sur ce même bouton
                 newCardBtn.removeEventListener('click', handleRandomCard);
+                // Je change la classe sur le bouton "tirer une carte" pour le griser
+                newCardBtn.classList.add('desactivated');
+                
                 // Puis je déclenche l'action précise du bateau qui gagne
-                setTimeout(winBoatAction, 500);
+                winBoatAction();
             } else {
                 // Sinon, je déclenche les actions normales
                 // Je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
                 // Juste histoire d'améliorer l'UX
-                setTimeout(actions(randomCard), 500);
+                actions(randomCard);
             }
     }
 
