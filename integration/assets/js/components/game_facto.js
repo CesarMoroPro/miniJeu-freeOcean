@@ -395,7 +395,8 @@ export function cardInit() {
                 // Sinon, je déclenche les actions normales
                 // Je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
                 // Juste histoire d'améliorer l'UX
-                actions(randomCard);
+                setTimeout(() => {
+                    actions(randomCard)}, 500);
             }
     }
 
