@@ -40,7 +40,7 @@ export function cardInit() {
     }
     // Donc ici, total = 20
 
-    //! STEP 7 ==============================================================================================
+    //! STEP 8 ==============================================================================================
     // Fonction déclenchée après avoir cliqué sur le bouton "Rejouer"
     function replayFunction() {
         // Au click sur le bouton replay,
@@ -49,7 +49,7 @@ export function cardInit() {
     }
 
 
-    //! STEP 6 ==============================================================================================
+    //! STEP 7 ==============================================================================================
     // Fonctionnalité déclenchée en cas de victoire du joueur
     function stopGame() {
 
@@ -67,7 +67,7 @@ export function cardInit() {
         // Si le filet est vide
         if(total === 0){
             // J'ajoute le texte de victoire + un bouton REJOUER
-            endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu devrais penser à soutenir et encourager Sea Shepherd !</p><p class=\"refresh\">Actualise la page pour rejouer</p><!--<p class=\"btn replay\">Rejouer</p>-->";
+            endDiv.innerHTML="<p class=\"victory\">Tous les animaux ont été libérés avant l'arrivée du bateau, super ! <br> Tu es fait pour être membre de Sea Shepherd !</p><p class=\"refresh\">Actualise la page pour rejouer</p><!--<p class=\"btn replay\">Rejouer</p>-->";
         }
         // Sinon, si le filet est à 1 ou plus quand le bateau l'atteint 
         else if(total > 0){
@@ -81,8 +81,19 @@ export function cardInit() {
         // replay.addEventListener('click', replayFunction);
     }
 
-
     //! STEP 5 ==============================================================================================
+    // Fonctionnalités pour déclenchement d'animations CSS pour faire disparaitre un animal ou faire avancer ou reculer le bateau
+    // Transition pour disparition animal
+    function disappearTransition() {
+        //TODO Fonctionnalité en attente
+    }
+
+    // Transition Bateau avance ou recule
+    function boatTransition(){
+        // TODO Fonctionnalité en attente
+    }
+
+    //! STEP 6 ==============================================================================================
     //* Déclaration des FONCTIONS D'ACTIONS des personnages
 
     //* Lorsque la carte BATEAU sera tirée, son action sera déclenchée
@@ -331,6 +342,7 @@ export function cardInit() {
                 alert.classList.add('popup-open');
                 // J'ajoute dans cette div le texte de l'alerte
                 alert.textContent = "Il n'y a plus de " + cardsList[randomCard][3] + " à libérer";
+                // TODO Ajouter un bouton OK pour fermer la div
                 
                 //* 3 - Insérer cette div
                 gameSpace.append(alert);
