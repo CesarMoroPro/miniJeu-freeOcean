@@ -2,6 +2,8 @@
    v5.0.1 | 20191019
    License: none (public domain)
 */
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -59,39 +61,39 @@ table {
 
 body {
   width: auto;
-  min-width: 450px;
+  min-width: 500px;
   text-align: center;
-  margin: 1em 0.5em;
-  padding: 1em 0.5em;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Raleway";
   font-size: 1em;
+  background: rgb(249, 245, 245);
+  background: linear-gradient(180deg, rgb(249, 245, 245) 3%, rgb(15, 98, 145) 73%, rgb(9, 60, 108) 91%, rgb(4, 56, 105) 100%);
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+body h1 {
+  color: #0f6291;
+  letter-spacing: 6px;
+  font-size: 2em;
+  margin: 0.5em;
+  font-family: "Rubik Dirt";
 }
 body h2 {
   color: green;
-  font-size: 1em;
-}
-
-@font-face {
-  font-family: "RubikDirt";
-  src: url("../../assets/fonts/Rubik_Dirt/RubikDirt-Regular.ttf");
-}
-@font-face {
-  font-family: "Raleway";
-  src: url("../../assets/fonts/Raleway/static/Raleway-Light.ttf");
-}
-#title h1 {
-  color: blue;
-  font-size: 2em;
-  margin: 0.5em;
-}
-#title h2 {
   font-size: 1.5em;
   margin: 0.25em;
   padding: 0.5em;
 }
+
 #title p {
   color: red;
   margin: 1em 0.5em;
+}
+
+footer {
+  background: rgb(249, 245, 245);
+  padding: 15px;
+  width: 100%;
+  line-height: 25px;
 }
 
 .bold {
@@ -154,10 +156,11 @@ body h2 {
   flex-direction: row;
   position: relative;
   align-items: flex-start;
-  width: 450px;
+  width: 500px;
   height: 250px;
-  padding: 0.5em;
+  padding: 50px 15px;
   margin: 0.25em 0;
+  border-radius: 8px;
 }
 #game-space #net {
   border: brown solid 2px;

@@ -4,7 +4,7 @@
   },
 
   "scripts": {
-    "sassC": "sass integration/scss/main.scss integration/css/main.css",
-    "sassW": "sass --watch integration/scss:integration/css"
+    "sc": "sass integration/scss/main.scss integration/css/main.css",
+    "sw": "sass --watch integration/scss:integration/css"
   }
 }

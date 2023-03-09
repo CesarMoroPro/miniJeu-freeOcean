@@ -8,11 +8,12 @@
 @import './utils/variables';
 
 //~ Import des fichiers de Bases
-@import './bases/body';
 @import './bases/fonts';
+@import './bases/body';
 
 //~ Import des fichiers Layouts
 @import './layouts/header';
+@import './layouts/footer';
 
 //~ Import des fichiers Pages
 @import './pages/game';

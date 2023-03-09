@@ -1,17 +1,31 @@
 body{
     
     width: auto;
-    min-width: 450px;
+    min-width: 500px;
     text-align: center;
-    margin: $gutter-small $gutter-small-extra;
-    padding: $gutter-small $gutter-small-extra;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: $font-main;
     font-size: $fontsize-regular;
+
+    background: $background-main;
+    background: $gradient-main;
+
+    h1 {
+        color: $color-main;
+        letter-spacing: 6px;
+        font-size: $fontsize-large-extra;
+        margin: $gutter-small-extra;
+        font-family: $font-secondary;
+    }
 
     h2 {
         color: green;
-        font-size: $fontsize-regular;
+        font-size: $fontsize-large;
+        margin: $gutter-small-double-extra;
+        padding: $gutter-small-extra;
     }
+
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 

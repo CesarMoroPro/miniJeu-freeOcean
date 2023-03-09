@@ -78,10 +78,12 @@
     position: relative;
     align-items: flex-start;
 
-    width: 450px;
+    width: 500px;
     height: 250px;
-    padding: $gutter-small-extra;
+    padding: 50px 15px;
     margin: $gutter-small-double-extra 0;
+
+    border-radius: 8px;
 
     #net {
         border: brown solid 2px;
