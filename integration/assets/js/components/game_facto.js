@@ -269,6 +269,10 @@ export function cardInit() {
             //* 0 - Désactiver le clic sur le bouton "tirer une carte"
             // Supprimer l'écouteur d'événement
             newCardBtn.removeEventListener('click', handleRandomCard);
+            // Je récupère le bouton pour pouvoir retirer une carte
+            let okayButton1 = document.querySelector('.okay-button-1');
+            // Je supprime sa classe "display-none"
+            okayButton1.classList.remove('display-none');
             
             //* 1 - Masquer la div no-popup
             // Je récupère la div no-popup
@@ -282,23 +286,28 @@ export function cardInit() {
             // Je lui donne une classe
             alert.classList.add('popup-open');
             // J'ajoute dans cette div le texte de l'alerte
-            alert.textContent = "Il n'y a plus de pieuvres à libérer";
+            alert.innerHTML = "<p style=\"color: white\">Il n'y a plus de pieuvres à libérer</p><div class=\"okay-button\">Ok, je retire</div>";
             
             //* 3 - Insérer cette div
             gameSpace.append(alert);
-            // Je change le curseur pour signaler à l'utilisateur que l'alerte est entièrement cliquable
-            alert.style.cursor="pointer";
-            // J'ajoute un événement au clic sur l'alerte
-            alert.addEventListener('click', () => {
-                // Je supprime la div alert
-                alert.remove();
-                // Et je supprime la classe inactive de noPopup pour que le plateau de jeu soit de nouveau visible
-                noPopup.classList.remove('inactive');
-                // Réactiver le clic sur le bouton "tirer une carte"
-                newCardBtn.addEventListener('click', handleRandomCard);
-            })
+
+             //* 4 - Je récupère les boutons qui ont la classe "okay-button"
+             let okayButtons = document.querySelectorAll('.okay-button');
+             // Je déclenche un événement au clic sur ces boutons
+             okayButtons.forEach(element => {
+                 element.style.cursor="pointer";
+                 element.addEventListener('click', () => {
+                     element.classList.add('display-none');
+                     okayButton1.classList.add('display-none');
+                     alert.remove();
+                     noPopup.classList.remove('inactive');
+                     newCardBtn.addEventListener('click', handleRandomCard);
+                 });
+             })
         }
     }
+
+
 
     //* Lorsqu'une autre carte sera tirée (poisson, tortue, requin ou dauphin), son action se déclenchera
     function animalAction(param) {
@@ -325,9 +334,13 @@ export function cardInit() {
                 }
 
             } else if(cardsList[i][1] === 0 && i === param){ // Création d'une alerte
-                //* 0 - Désactiver le clic sur le bouton "tirer une carte"
+                //* 0 - Désactiver le clic sur le bouton "tirer une carte" et faire apparaître le bouton de retirage
                 // Supprimer l'écouteur d'événement
                 newCardBtn.removeEventListener('click', handleRandomCard);
+                // Je récupère le bouton pour pouvoir retirer une carte
+                let okayButton1 = document.querySelector('.okay-button-1');
+                // Je supprime sa classe "display-none"
+                okayButton1.classList.remove('display-none');
                 
                 //* 1 - Masquer la div no-popup
                 // Je récupère la div no-popup
@@ -341,21 +354,24 @@ export function cardInit() {
                 // Je lui donne une classe
                 alert.classList.add('popup-open');
                 // J'ajoute dans cette div le texte de l'alerte
-                alert.textContent = "Il n'y a plus de " + cardsList[randomCard][3] + " à libérer";
-                // TODO Ajouter un bouton OK pour fermer la div
+                alert.innerHTML = "<p style=\"color: white\">Il n'y a plus de " + cardsList[randomCard][3] + " à libérer</p><div class=\"okay-button\">Ok, je retire</div>";
+                
                 
                 //* 3 - Insérer cette div
                 gameSpace.append(alert);
-                // Je change le curseur pour signaler à l'utilisateur que l'alerte est entièrement cliquable
-                alert.style.cursor="pointer";
-                // J'ajoute un événement au clic sur l'alerte
-                alert.addEventListener('click', () => {
-                    // Je supprime la div alert
-                    alert.remove();
-                    // Et je supprime la classe inactive de noPopup pour que le plateau de jeu soit de nouveau visible
-                    noPopup.classList.remove('inactive');
-                    // Je réactive le clic sur le bouton "tirer une carte"
-                    newCardBtn.addEventListener('click', handleRandomCard);
+
+                //* 4 - Je récupère les boutons qui ont la classe "okay-button"
+                let okayButtons = document.querySelectorAll('.okay-button');
+                // Je déclenche un événement au clic sur ces boutons
+                okayButtons.forEach(element => {
+                    element.style.cursor="pointer";
+                    element.addEventListener('click', () => {
+                        element.classList.add('display-none');
+                        okayButton1.classList.add('display-none');
+                        alert.remove();
+                        noPopup.classList.remove('inactive');
+                        newCardBtn.addEventListener('click', handleRandomCard);
+                    });
                 })
             }
         } 

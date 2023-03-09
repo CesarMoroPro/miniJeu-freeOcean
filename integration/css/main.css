@@ -59,6 +59,14 @@ table {
   border-spacing: 0;
 }
 
+.display-none {
+  display: none;
+}
+
+.alert-message {
+  color: rgb(249, 245, 245);
+}
+
 body {
   width: auto;
   min-width: 500px;
@@ -67,6 +75,7 @@ body {
   font-size: 1em;
   background: rgb(249, 245, 245);
   background: linear-gradient(180deg, rgb(249, 245, 245) 3%, rgb(15, 98, 145) 73%, rgb(9, 60, 108) 91%, rgb(4, 56, 105) 100%);
+  background-repeat: no-repeat;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -90,10 +99,9 @@ body h2 {
 }
 
 footer {
-  background: rgb(249, 245, 245);
-  padding: 15px;
   width: 100%;
   line-height: 25px;
+  color: rgb(249, 245, 245);
 }
 
 .bold {
@@ -163,14 +171,14 @@ footer {
   border-radius: 8px;
 }
 #game-space #net {
-  border: brown solid 2px;
+  border: #DD1400 solid 2px;
   border-radius: 130px;
   position: relative;
   width: 200px;
   height: 200px;
 }
 #game-space .blood-net {
-  background-color: rgba(128, 9, 9, 0.8);
+  background-color: rgba(221, 20, 0, 0.8);
 }
 
 @media (min-width: 720px) {
@@ -340,12 +348,22 @@ footer {
   color: black;
 }
 
+.okay-button {
+  margin: 5px 0;
+  padding: 5px;
+  border: solid 1px #0f6291;
+  border-radius: 3px;
+  background-color: #0f6291;
+  color: rgb(249, 245, 245);
+}
+
 .replay {
   cursor: pointer;
 }
 
 .boat {
-  border: blue dashed 1px;
+  border: #00FF00 dashed 1px;
+  border-radius: 60px;
   position: absolute;
   width: 60px;
   height: 60px;
@@ -357,6 +375,8 @@ footer {
 .boat-mini {
   width: 60px;
   height: 60px;
+  padding-top: 4px;
+  border-radius: 60px;
 }
 
 .boat--0 {
@@ -390,7 +410,7 @@ footer {
 }
 
 .focused {
-  border: solid 2px brown;
+  border: solid 2px #00FF00;
 }
 
 .end-div {

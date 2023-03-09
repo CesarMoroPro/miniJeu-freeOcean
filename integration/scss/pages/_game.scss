@@ -86,7 +86,7 @@
     border-radius: 8px;
 
     #net {
-        border: brown solid 2px;
+        border: $red solid 2px;
         border-radius: 130px;
         position: relative;
         width: 200px;
@@ -94,7 +94,7 @@
     }
 
     .blood-net {
-        background-color: rgba(128, 9, 9, 0.80);
+        background-color: rgba($red, 0.80);
     }
 }
 

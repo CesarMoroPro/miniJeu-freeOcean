@@ -9,9 +9,10 @@ body{
 
     background: $background-main;
     background: $gradient-main;
+    background-repeat: no-repeat;
 
     h1 {
-        color: $color-main;
+        color: $blue;
         letter-spacing: 6px;
         font-size: $fontsize-large-extra;
         margin: $gutter-small-extra;

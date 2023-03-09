@@ -1,5 +1,6 @@
 .boat {
-    border: blue dashed 1px;
+    border: $green dashed 1px;
+    border-radius: 60px;
 
     position: absolute;
     width: 60px;
@@ -13,6 +14,9 @@
 .boat-mini {
     width: 60px;
     height: 60px;
+    padding-top: 4px;
+
+    border-radius: 60px;
 }
 
 .boat--0 {
@@ -47,5 +51,5 @@
 
 
 .focused {
-    border: solid 2px brown;
+    border: solid 2px $green;
 }
