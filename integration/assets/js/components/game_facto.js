@@ -1,4 +1,5 @@
 export function cardInit() {
+    // console.log("Fichier game_facto.js chargé, fonction cardInit() initialisée");
 
     //! STEP 1 ==============================================================================================
     //* Déclaration des VARIABLES
@@ -96,7 +97,7 @@ export function cardInit() {
     //! STEP 6 ==============================================================================================
     //* Déclaration des FONCTIONS D'ACTIONS des personnages
 
-    //* Lorsque la carte BATEAU sera tirée, son action sera déclenchée
+    //^ Lorsque la carte BATEAU sera tirée, son action sera déclenchée
     function boatAction() {
 
         //* 1 - Faire avancer le bateau puisque le jeu commence avec le bateau en position 0
@@ -136,10 +137,10 @@ export function cardInit() {
         setTimeout(stopGame, 1000);
     }
 
-    //* Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
+    //^ Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
     function oceanAction() {
         //* L'action Océan consiste à laisser le choix à l'utilisateur : quel animal restant encore dans le filet il veut libérer
-        //TODO Si le filet comporte plusieurs sortes d'animaux, alors déclenche la fonction animalAction(i) ou octopusAction(), selon le clic utilisateur
+        //TODO Si le filet comporte plusieurs sortes d'animaux, ouvrir une div qui impose un choix à l'utilisateur, qui déclenchera la fonction associée (animalAction(i) ou octopusAction())
         //TODO Si le filet ne comporte plus qu'une sorte d'animal, alors son action est déclenchée directement sans ouvrir de popup choix utilisateur
 
         // Alors le code popupOcean pour le choix de l'utilisateur peut être lancé
@@ -203,7 +204,8 @@ export function cardInit() {
         }
     }
 
-    //* Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
+
+    //^ Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
 
         if(cardsList[2][1] > 0){
@@ -309,7 +311,7 @@ export function cardInit() {
 
 
 
-    //* Lorsqu'une autre carte sera tirée (poisson, tortue, requin ou dauphin), son action se déclenchera
+    //^ Lorsqu'une autre carte sera tirée (poisson, tortue, requin ou dauphin), son action se déclenchera
     function animalAction(param) {
            
         // Je boucle sur le tableau à partir de la TORTUE (index 3)
@@ -434,7 +436,3 @@ export function cardInit() {
     // Au clic sur le bouton "tirer une carte", le handler Total() est déclenché
     newCardBtn.addEventListener('click', handleRandomCard);
 }
-
-
-//* Application de ce code lorsque le DOM complet est chargé avec succès.
-window.addEventListener('DOMContentLoaded', cardInit);

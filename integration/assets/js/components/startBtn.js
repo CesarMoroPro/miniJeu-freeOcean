@@ -1,4 +1,5 @@
 export function startBtn() {
+    // console.log("Fichier startBtn.js chargé, fonction startBtn() initialisée");
 
     //* Déclarations des variables
     let playNowBtn      = document.querySelector('.startBtn');
@@ -17,8 +18,3 @@ export function startBtn() {
         resultDiv.classList.replace('inactive', 'active');
     }
 }
-
-
-
-//* Application de ce code lorsque le DOM complet est chargé avec succès.
-window.addEventListener('DOMContentLoaded', startBtn);
