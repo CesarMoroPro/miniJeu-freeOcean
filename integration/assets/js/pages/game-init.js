@@ -63,7 +63,7 @@ export function gameInit() {
 
 
 
-    //! STEP 9 ==============================================================================================
+    //! STEP 10 ==============================================================================================
     // Fonction déclenchée après avoir cliqué sur le bouton "Rejouer"
     function replayFunction() {
         // Au click sur le bouton replay,
@@ -75,7 +75,7 @@ export function gameInit() {
 
 
 
-    //! STEP 8 ==============================================================================================
+    //! STEP 9 ==============================================================================================
     // Fonctionnalité déclenchée en fin de partie
     function stopGame() {
 
@@ -111,10 +111,9 @@ export function gameInit() {
 
 
 
-    //! STEP 7 ==============================================================================================
+    //! STEP 8 ==============================================================================================
     function alertNoMoreAnimal(paramAnimal) {
 
-        // Création d'une alerte
         //* 0 - Désactiver le clic sur le bouton "tirer une carte"
         // Supprimer l'écouteur d'événement
         newCardBtn.removeEventListener('click', handleRandomCard);
@@ -135,7 +134,7 @@ export function gameInit() {
         // Je lui donne une classe
         alert.classList.add('popup-open');
         // J'ajoute dans cette div le texte de l'alerte
-        alert.innerHTML = "<p style=\"color: white\">Il n'y a plus de " + paramAnimal + "à libérer</p><div class=\"okay-button\">Ok, je retire</div>";
+        alert.innerHTML = "<p style=\"color: white\">Il n'y a plus de " + paramAnimal + " à libérer</p><div class=\"okay-button\">Ok, je retire</div>";
         
         //* 3 - Insérer cette div
         gameSpace.append(alert);
@@ -153,6 +152,32 @@ export function gameInit() {
                 newCardBtn.addEventListener('click', handleRandomCard);
                 });
         })
+    }
+
+
+
+
+
+    //! STEP 7 ==============================================================================================
+    function transitionAndRemoveAnimal(paramAnimal) {
+
+        // Je stocke les éléments ayant la classe correspondant à l'index 0 de randomCard (soit la valeur nom) dans le cas de paramAnimal = cardsList[i][0]
+        // J'utilise query selector pour obtenir une node list
+        let elementsToRemove = document.querySelectorAll('.' + paramAnimal);
+        // J'ajoute une class CSS pour faire une transition de déplacement avant la suppression
+        elementsToRemove[0].classList.add('transitionBeforeRemove');
+
+        //* Je supprime un élément de cette liste
+        //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
+        // D'où l'intérêt d'avoir récupéré ces éléments en node list avec query selector
+        // node.removeChild(child)
+        // Je passe par un setTimeout afin de laisser le temps à la transition de s'effectuer (pendant 1 seconde)
+        // Et je pense à réactiver le click sur le bouton pour tirer une nouvelle carte
+        setTimeout(() => { 
+                net.removeChild(elementsToRemove[0]);
+                newCardBtn.addEventListener('click', handleRandomCard);
+                newCardBtn.classList.remove('desactivated');
+        }, 1500);
     }
 
 
@@ -196,6 +221,12 @@ export function gameInit() {
                 boatPosition0 = true;
             };
         };
+
+        // Et je pense à réactiver le click sur le bouton pour tirer une nouvelle carte
+        setTimeout(() => { 
+            newCardBtn.addEventListener('click', handleRandomCard);
+            newCardBtn.classList.remove('desactivated');
+        }, 1500);
     };
 
 
@@ -232,7 +263,13 @@ export function gameInit() {
         // focusedElement contenant la classe "focused"
         focusedElement = nextFocusedElement;
         // Je n'oublie pas de changer la valeur du booléen permettant de bloquer le recul du bateau ou non
-        boatPosition0 = false;                
+        boatPosition0 = false;
+        
+        // Et je pense à réactiver le click sur le bouton pour tirer une nouvelle carte
+        setTimeout(() => { 
+            newCardBtn.addEventListener('click', handleRandomCard);
+            newCardBtn.classList.remove('desactivated');
+        }, 1500);
     }
 
     //^ STEP 5-A-2  : Si le bateau arrive au filet
@@ -243,7 +280,7 @@ export function gameInit() {
         // J'ajoute la classe "blodd-net" sur le filet "net"
         net.classList.add('blood-net');
         // Je déclenche la fonction de défaite après un court délai
-        setTimeout(stopGame, 2000); //< DIRECTION STEP 8
+        setTimeout(stopGame, 2000); //< DIRECTION STEP 9
     }
 
     //^ STEP 5-B : Lorsque la carte OCÉAN sera tirée, son action sera déclenchée
@@ -325,23 +362,16 @@ export function gameInit() {
         //^ STEP 5-C-2 : Suppression d'une pieuvre OU Création d'une div alerte
         if(cardsList[2][1] > 0){
 
-            (function freeOctopus(){ 
-                // Suppression d'une pieuvre
-                // Récupération du premier élément Octopus
-                let octopusEl = document.querySelector('.octopus');
-                // Suppression de l'élément Octopus dans le code source 
-                //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
-                // node.removeChild(child)
-                net.removeChild(octopusEl);
-                // Je supprime une quantité de l'objet octopus
-                cardsList[2][1] -= 1;
-                total -= 1;
-                if(total === 0){
-                    stopGame();
-                }
-            })();
+            // Je déclenche l'animation de transition CSS pour améliorer l'UX
+            transitionAndRemoveAnimal('octopus'); //< DIRECTION STEP 7
+
+            cardsList[2][1] -= 1;
+            total -= 1;
+            if(total === 0){
+                stopGame(); //< DIRECTION STEP 9
+            }
         } else if(cardsList[2][1] === 0){ 
-           alertNoMoreAnimal(cardsList[2][3]); //< DIRECTION STEP 7
+           alertNoMoreAnimal(cardsList[2][3]); //< DIRECTION STEP 8
         }
     }
 
@@ -355,23 +385,18 @@ export function gameInit() {
             // Si la quantité de l'élément est supérieur à 0 ET si l'index du tableau parcouru vaut le paramètre randomCard
             if(cardsList[i][1] > 0 && i === param) {
 
-                // Alors je stocke les éléments ayant la classe correspondant à l'index 0 de randomCard (soit la valeur nom)
-                // J'utilise query selector pour obtenir une node list
-                let elementsToRemove = document.querySelectorAll('.' + cardsList[i][0]);
-                // Je supprime un élément de cette liste
-                //! Pour le supprimer, il faut passer par le noeud parent qui a déjà été récupéré en global : variable "net"
-                // D'où l'intérêt d'avoir récupéré ces éléments en node list avec query selector
-                // node.removeChild(child)
-                net.removeChild(elementsToRemove[0]);
+                // Je déclenche l'animation de transition CSS pour améliorer l'UX
+                transitionAndRemoveAnimal(cardsList[i][0]); //< DIRECTION STEP 7
+
                 // Puis je supprime une quantité de l'animal retiré
                 cardsList[param][1] -= 1;
                 total -= 1;
                 if(total === 0){
-                    stopGame(); //< DIRECTION STEP 8
+                    stopGame(); //< DIRECTION STEP 9
                 }
 
             } else if(cardsList[i][1] === 0 && i === param){
-               alertNoMoreAnimal(cardsList[randomCard][3]); //< DIRECTION STEP 7
+               alertNoMoreAnimal(cardsList[randomCard][3]); //< DIRECTION STEP 8
             }
         } 
     }
@@ -405,32 +430,36 @@ export function gameInit() {
     //* Déclaration de la fonction RANDOM CARD
     function handleRandomCard() {
 
-            randomCard              = Math.floor(Math.random() * (cardsList.length));
-            let resultCardDiv       = document.querySelector('#resultCard');
+        // Je commence par désactiver le click sur le bouton pour tirer une nouvelle carte
+        newCardBtn.removeEventListener('click', handleRandomCard);
+        newCardBtn.classList.add('desactivated'); //< RÉACTIVATION SANS STEP 7 pour animal et pour le bâteau
 
-            // J'incrémente le contenu de ma variable dans ma div
-            // Ici, résultat écrit : resultCardDiv.textContent = cardsList[randomCard][3];
-            // Là, résultat avec une image
-            resultCardDiv.innerHTML="<" + cardsList[randomCard][4] + "class=\"result-card-poufff\">";
+        randomCard              = Math.floor(Math.random() * (cardsList.length));
+        let resultCardDiv       = document.querySelector('#resultCard');
 
-            // Si randomCard vaut false (donc le bateau est tiré)
-            // ET SI "focusedElement" contient la classe "boat--5"
-            // ET SI la quantité dans le filet "total" est supérieur à 0
-            if(focusedElement.classList.contains('boat--5') && total > 0 && randomCard == false){
-                // Je désactive le clic sur ce même bouton
-                newCardBtn.removeEventListener('click', handleRandomCard);
-                // Je change la classe sur le bouton "tirer une carte" pour le griser
-                newCardBtn.classList.add('desactivated');
-                
-                // Puis je déclenche l'action précise du bateau qui gagne
-                winBoatAction(); //< DIRECTION STEP 5-A-2
-            } else {
-                // Sinon, je déclenche les actions normales
-                // Je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
-                // Juste histoire d'améliorer l'UX
-                setTimeout(() => {
-                    actions(randomCard)}, 500); //< DIRECTION STEP 4
-            }
+        // J'incrémente le contenu de ma variable dans ma div
+        // Ici, résultat écrit : resultCardDiv.textContent = cardsList[randomCard][3];
+        // Là, résultat avec une image
+        resultCardDiv.innerHTML="<" + cardsList[randomCard][4] + "class=\"result-card-poufff\">";
+
+        // Si randomCard vaut false (donc le bateau est tiré)
+        // ET SI "focusedElement" contient la classe "boat--5"
+        // ET SI la quantité dans le filet "total" est supérieur à 0
+        if(focusedElement.classList.contains('boat--5') && total > 0 && randomCard == false){
+            // Je désactive le clic sur ce même bouton
+            newCardBtn.removeEventListener('click', handleRandomCard);
+            // Je change la classe sur le bouton "tirer une carte" pour le griser
+            newCardBtn.classList.add('desactivated');
+            
+            // Puis je déclenche l'action précise du bateau qui gagne
+            winBoatAction(); //< DIRECTION STEP 5-A-2
+        } else {
+            // Sinon, je déclenche les actions normales
+            // Je laisse un délai d'une demi-seconde entre l'apparition de la carte et son action dans le jeu
+            // Juste histoire d'améliorer l'UX
+            setTimeout(() => {
+                actions(randomCard)}, 500); //< DIRECTION STEP 4
+        }
     }
 
 

@@ -5,3 +5,10 @@
 .alert-message {
         color: $white;
 }
+
+.transitionBeforeRemove {
+        transition-property: transform;
+        transition-duration: 1s;
+
+        transform: translate(-200px, -50px);
+}

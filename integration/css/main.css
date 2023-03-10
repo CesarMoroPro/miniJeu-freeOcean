@@ -67,6 +67,12 @@ table {
   color: rgb(249, 245, 245);
 }
 
+.transitionBeforeRemove {
+  transition-property: transform;
+  transition-duration: 1s;
+  transform: translate(-200px, -50px);
+}
+
 body {
   width: auto;
   min-width: 500px;
