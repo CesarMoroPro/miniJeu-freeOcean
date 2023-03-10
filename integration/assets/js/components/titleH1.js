@@ -1,5 +1,5 @@
 export function titleInit() {
-        console.log("Fichier titleH1.js chargé, fonction titleInit() initialisée");
+        // console.log("Fichier titleH1.js chargé, fonction titleInit() initialisée");
 
         //* Je récupère le titre H1
         let h1 = document.querySelector('h1');
