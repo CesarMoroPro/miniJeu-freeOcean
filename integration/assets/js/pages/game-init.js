@@ -48,15 +48,9 @@ export function gameInit() {
 
 
     //! STEP X ==============================================================================================
-    // Fonctionnalités pour déclenchement d'animations CSS pour faire disparaitre un animal ou faire avancer ou reculer le bateau
-    // Transition pour disparition animal
-    function disappearTransition() {
-        //TODO Fonctionnalité en attente
-    }
-
-    // Transition Bateau avance ou recule
+    // TODO Fonctionnalités pour déclenchement d'animations CSS pour faire avancer ou reculer le bateau
     function boatTransition(){
-        // TODO Fonctionnalité en attente
+        
     }
 
 
@@ -145,11 +139,12 @@ export function gameInit() {
         okayButtons.forEach(element => {
                 element.style.cursor="pointer";
                 element.addEventListener('click', () => {
-                element.classList.add('display-none');
-                okayButton1.classList.add('display-none');
-                alert.remove();
-                noPopup.classList.remove('inactive');
-                newCardBtn.addEventListener('click', handleRandomCard);
+                    element.classList.add('display-none');
+                    okayButton1.classList.add('display-none');
+                    alert.remove();
+                    noPopup.classList.remove('inactive');
+                    newCardBtn.addEventListener('click', handleRandomCard);
+                    newCardBtn.classList.remove('desactivated');
                 });
         })
     }
