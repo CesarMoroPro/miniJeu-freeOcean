@@ -24,13 +24,13 @@ export function gameInit() {
     // Tableau contenant tous les "personnages" du jeu, leur quantité, et le cas échéant leur classe dans le code source, leur nom en français, et le chemin vers leur image (depuis index.html) (chemin non dynamique) 
     let cardsList           = 
                             [
-                                ['boat',    1, 'EMPTY',     'bateau',   'img src="./assets/img/bateau.jpeg"'],
-                                ['ocean',   1, 'EMPTY',     'océan',    'img src="./assets/img/ocean.png"'],
-                                ['octopus', 2, 'octopus',   'pieuvre',  'img src="./assets/img/pieuvre.png"'], // ['nom', quantité, 'classe html', 'nom en français', 'chemin vers image']
-                                ['turtle',  4, 'turtle',    'tortue',   'img src="./assets/img/tortue.jpg"'],
-                                ['fish',    8, 'fish',      'poisson',  'img src="./assets/img/poisson.jpg"'],
-                                ['shark',   3, 'shark',     'requin',   'img src="./assets/img/requin.jpg"'],
-                                ['dolphin', 3, 'dolphin',   'dauphin',  'img src="./assets/img/dauphin.png"']
+                                ['boat',    1, 'EMPTY',     'bateau',   'img src="./assets/img/bateau-nobg.png"'],
+                                ['ocean',   1, 'EMPTY',     'océan',    'img src="./assets/img/ocean-nobg.png"'],
+                                ['octopus', 2, 'octopus',   'pieuvre',  'img src="./assets/img/pieuvre-nobg.png"'], // ['nom', quantité, 'classe html', 'nom en français', 'chemin vers image']
+                                ['turtle',  4, 'turtle',    'tortue',   'img src="./assets/img/tortue-nobg.png"'],
+                                ['fish',    8, 'fish',      'poisson',  'img src="./assets/img/poisson-nobg.png"'],
+                                ['shark',   3, 'shark',     'requin',   'img src="./assets/img/requin-nobg.png"'],
+                                ['dolphin', 3, 'dolphin',   'dauphin',  'img src="./assets/img/dauphin-nobg.png"']
                             ]
 
     // Stockage de la quantité totale d'animaux dans le filet
@@ -354,7 +354,7 @@ export function gameInit() {
     //^ STEP 5-C : Lorsque la carte PIEUVRE sera tirée, ses deux actions seront déclenchées
     function octopusAction() {
 
-        if(cardsList[2][1] > 0){
+        if(cardsList[2][1] > 0 && boatPosition0 === false) {
             // Les fonctions des PIEUVRES ne sont disponibles que si des pieuvres sont encore piégées
            backBoat(); //< DIRECTION STEP 6
         };
