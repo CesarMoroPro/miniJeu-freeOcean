@@ -34,7 +34,7 @@
                     <li class="each-rule">- La carte <span class="bold">BATEAU</span> fait avancer le bateau d'une case.</li>
                     <li class="each-rule">- La carte <span class="bold">OCEAN</span> te permet de choisir quel animal tu veux libérer.</li>
                     <li class="each-rule">- Les cartes <span class="bold">POISSON, PIEUVRE, REQUIN, DAUPHIN</span> et <span class="bold">TORTUE</span> te permettent de libérer l'animal correspondant.</li>
-                    <li class="each-rule">- Bonus : la carte <span class="bold">PIEUVRE</span> a un pouvoir. Les pieuvres, avec leur tentacules, sont capables de faire reculer le bateau d'une case.</li>
+                    <li class="each-rule">- Bonus : la carte <span class="bold">PIEUVRE</span> a un pouvoir. Les pieuvres sont capables de faire reculer le bateau d'une case.</li>
                 </ul>
             </div>
         </div>
@@ -90,21 +90,12 @@
             Le but de ce projet n'était pas de se focaliser sur l'esthétique mais plutôt sur les fonctionnalités du jeu.
         </p>
         
-        <div class="modifications">
-            <h2>Modifications UI à prévoir pour une version supérieure :</h2>
+        <h2>Modifications à prévoir pour une version supérieure :</h2>
             <ul>
+                <li>Lorsque la carte "Océan" est tirée, s'il ne reste qu'une seule espèce dans le filet, ne pas ouvrir la div de choix d'animal à libérer.</li>
                 <li>Ajouter une animation au H1, style flottaison pour rappeler le mouvement de l'eau dans la mer.</li>
                 <li>Ajouter des bulles qui remontent aléatoirement du bas de la page jusque vers le haut.</li>
             </ul>
-        
-            <h2>Modifications fonctionnelles à prévoir également :</h2>
-            <ul>
-                <li>Lorsque la carte "Océan" est tirée, s'il ne reste qu'une seule espèce dans le filet, ne pas ouvrir la div de choix d'animal à libérer.</li>
-                <li>Dans certains cas très précis, le bâteau réussi à reculer en position "-1" au lieu d'être bloqué en "0"</li>
-                <li>Bouton "Rejouer" sans avoir besoin de rafraichir la page.</li>
-                <li>Sauvegarder le nombre de victoires et de défaites</li>
-            </ul>
-        </div>
     </footer>
     
     <script type="module" src="./assets/js/main.js"></script>
