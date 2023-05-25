@@ -2,9 +2,11 @@
   "dependencies": {
     "reset-css": "^5.0.1"
   },
-
   "scripts": {
     "sc": "sass integration/scss/main.scss integration/css/main.css",
     "sw": "sass --watch integration/scss:integration/css"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.8.0"
   }
 }
