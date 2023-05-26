@@ -74,9 +74,8 @@ table {
 }
 
 body {
-  width: auto;
   height: auto;
-  min-width: 500px;
+  width: 100%;
   text-align: center;
   font-family: "Raleway";
   font-size: 1em;
